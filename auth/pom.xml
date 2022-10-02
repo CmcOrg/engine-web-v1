@@ -14,10 +14,28 @@
 
     <dependencies>
 
+        <!-- kafka -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>kafka</artifactId>
+        </dependency>
+
+        <!-- log -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>log</artifactId>
+        </dependency>
+
         <!-- util -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>util</artifactId>
+        </dependency>
+
+        <!-- knife4j -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>knife4j</artifactId>
         </dependency>
 
         <!-- model -->

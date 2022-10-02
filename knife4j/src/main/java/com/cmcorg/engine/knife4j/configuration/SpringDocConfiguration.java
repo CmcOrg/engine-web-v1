@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class SpringDocConfiguration {
 
     @Bean
-    public GroupedOpenApi groupedOpenApi(@Value("${spring.application.name:helper-project}") String applicationName) {
+    public GroupedOpenApi groupedOpenApi(@Value("${spring.application.name:engine-web-v1}") String applicationName) {
         return GroupedOpenApi.builder().group(applicationName)
             .addOpenApiMethodFilter(it -> it.getAnnotation(Operation.class) != null).build();
     }
