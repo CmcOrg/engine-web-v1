@@ -9,33 +9,21 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cache</artifactId>
-    <description>缓存模块</description>
+    <artifactId>knife4j</artifactId>
+    <description>knife4j</description>
 
     <dependencies>
 
-        <!-- log -->
+        <!-- model -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>log</artifactId>
+            <artifactId>model</artifactId>
         </dependency>
 
-        <!-- redisson -->
+        <!-- knife4j -->
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>redisson</artifactId>
-        </dependency>
-
-        <!-- kafka -->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>kafka</artifactId>
-        </dependency>
-
-        <!-- caffeine -->
-        <dependency>
-            <groupId>com.github.ben-manes.caffeine</groupId>
-            <artifactId>caffeine</artifactId>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-springdoc-ui</artifactId>
         </dependency>
 
     </dependencies>

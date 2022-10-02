@@ -9,33 +9,21 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cache</artifactId>
-    <description>缓存模块</description>
+    <artifactId>redisson</artifactId>
+    <description>redisson</description>
 
     <dependencies>
 
-        <!-- log -->
+        <!-- util -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>log</artifactId>
+            <artifactId>util</artifactId>
         </dependency>
 
         <!-- redisson -->
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>redisson</artifactId>
-        </dependency>
-
-        <!-- kafka -->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>kafka</artifactId>
-        </dependency>
-
-        <!-- caffeine -->
-        <dependency>
-            <groupId>com.github.ben-manes.caffeine</groupId>
-            <artifactId>caffeine</artifactId>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
         </dependency>
 
     </dependencies>

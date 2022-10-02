@@ -9,33 +9,21 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cache</artifactId>
-    <description>缓存模块</description>
+    <artifactId>log</artifactId>
+    <description>log</description>
 
     <dependencies>
 
-        <!-- log -->
+        <!-- model -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>log</artifactId>
+            <artifactId>model</artifactId>
         </dependency>
 
-        <!-- redisson -->
+        <!-- nacos-config -->
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>redisson</artifactId>
-        </dependency>
-
-        <!-- kafka -->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>kafka</artifactId>
-        </dependency>
-
-        <!-- caffeine -->
-        <dependency>
-            <groupId>com.github.ben-manes.caffeine</groupId>
-            <artifactId>caffeine</artifactId>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
 
     </dependencies>

@@ -23,69 +23,260 @@
         <skipTests>true</skipTests>
     </properties>
 
+    <modules>
+        <module>cache</module>
+        <module>redisson</module>
+        <module>model</module>
+        <module>knife4j</module>
+        <module>util</module>
+        <module>datasource</module>
+        <module>auth</module>
+        <module>kafka</module>
+        <module>log</module>
+        <module>auth-nacos</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- log -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>auth-nacos</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- log -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>log</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- kafka -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>kafka</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- auth -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>auth</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- datasource -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>datasource</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- util -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>util</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- knife4j -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>knife4j</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- model -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- redisson -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- cache -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>cache</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- spring-cloud-dependencies -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>2021.0.4</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- nacos-discovery -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>2021.0.4.0</version>
+            </dependency>
+
+            <!-- nacos-config -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>2021.0.4.0</version>
+            </dependency>
+
+            <!-- sharding-jdbc -->
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+                <version>4.1.1</version>
+            </dependency>
+
+            <!-- protobuf -->
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java</artifactId>
+                <version>3.21.7</version>
+            </dependency>
+
+            <!-- ssh，sftp -->
+            <dependency>
+                <groupId>com.jcraft</groupId>
+                <artifactId>jsch</artifactId>
+                <version>0.1.55</version>
+            </dependency>
+
+            <!-- excel操作 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>3.1.1</version>
+            </dependency>
+
+            <!-- 基于JNA的操作系统和硬件信息库 -->
+            <dependency>
+                <groupId>com.github.oshi</groupId>
+                <artifactId>oshi-core</artifactId>
+                <version>6.2.2</version>
+            </dependency>
+
+            <!-- xxl-job -->
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>2.3.1</version>
+            </dependency>
+
+            <!-- 腾讯云，获取最新版本号：https://github.com/tencentcloud/tencentcloud-sdk-java -->
+            <dependency>
+                <groupId>com.tencentcloudapi</groupId>
+                <artifactId>tencentcloud-sdk-java</artifactId>
+                <version>3.1.600</version>
+            </dependency>
+
+            <!-- 支付宝，获取最新版本号：https://github.com/alipay/alipay-sdk-java-all -->
+            <dependency>
+                <groupId>com.alipay.sdk</groupId>
+                <artifactId>alipay-sdk-java</artifactId>
+                <version>4.34.0.ALL</version>
+            </dependency>
+
+            <!-- 邮件 -->
+            <dependency>
+                <groupId>com.sun.mail</groupId>
+                <artifactId>javax.mail</artifactId>
+                <version>1.6.2</version>
+            </dependency>
+
+            <!-- redisson -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>3.17.6</version>
+            </dependency>
+
+            <!-- 离线IP地址定位库 -->
+            <dependency>
+                <groupId>org.lionsoul</groupId>
+                <artifactId>ip2region</artifactId>
+                <version>2.6.5</version>
+            </dependency>
+
+            <!-- knife4j -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-springdoc-ui</artifactId>
+                <version>3.0.3</version>
+            </dependency>
+
+            <!-- springdoc -->
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>1.6.11</version>
+            </dependency>
+
+            <!-- hutool -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>5.8.7</version>
+            </dependency>
+
+            <!-- mybatis-plus -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>3.5.2</version>
+            </dependency>
+
+            <!-- jetbrains-annotations -->
+            <dependency>
+                <groupId>org.jetbrains</groupId>
+                <artifactId>annotations</artifactId>
+                <version>23.0.0</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
 
+        <!-- jetbrains-annotations -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
+        <!-- configuration-processor -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
 
+        <!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
 
+        <!-- test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        
     </dependencies>
 
     <build>
@@ -98,6 +289,18 @@
                         <exclude>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
+                        </exclude>
+                        <exclude>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-configuration-processor</artifactId>
+                        </exclude>
+                        <dependency>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-starter-actuator</artifactId>
+                        </dependency>
+                        <exclude>
+                            <groupId>org.jetbrains</groupId>
+                            <artifactId>annotations</artifactId>
                         </exclude>
                     </excludes>
                 </configuration>

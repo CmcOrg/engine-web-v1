@@ -9,33 +9,27 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cache</artifactId>
-    <description>缓存模块</description>
+    <artifactId>kafka</artifactId>
+    <description>kafka</description>
 
     <dependencies>
 
-        <!-- log -->
+        <!-- util -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>log</artifactId>
+            <artifactId>util</artifactId>
         </dependency>
 
-        <!-- redisson -->
+        <!-- model -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>redisson</artifactId>
+            <artifactId>model</artifactId>
         </dependency>
 
         <!-- kafka -->
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>kafka</artifactId>
-        </dependency>
-
-        <!-- caffeine -->
-        <dependency>
-            <groupId>com.github.ben-manes.caffeine</groupId>
-            <artifactId>caffeine</artifactId>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
         </dependency>
 
     </dependencies>

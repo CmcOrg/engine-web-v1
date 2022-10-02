@@ -9,15 +9,33 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cache</artifactId>
-    <description>缓存模块</description>
+    <artifactId>auth</artifactId>
+    <description>auth</description>
 
     <dependencies>
 
-        <!-- log -->
+        <!-- util -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>log</artifactId>
+            <artifactId>util</artifactId>
+        </dependency>
+
+        <!-- model -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>model</artifactId>
+        </dependency>
+
+        <!-- spring-boot-web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- cache -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>cache</artifactId>
         </dependency>
 
         <!-- redisson -->
@@ -26,16 +44,16 @@
             <artifactId>redisson</artifactId>
         </dependency>
 
-        <!-- kafka -->
+        <!-- datasource -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>kafka</artifactId>
+            <artifactId>datasource</artifactId>
         </dependency>
 
-        <!-- caffeine -->
+        <!-- security -->
         <dependency>
-            <groupId>com.github.ben-manes.caffeine</groupId>
-            <artifactId>caffeine</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
     </dependencies>
