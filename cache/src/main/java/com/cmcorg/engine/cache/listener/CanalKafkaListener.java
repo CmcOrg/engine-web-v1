@@ -73,6 +73,9 @@ public class CanalKafkaListener {
 
     }
 
+    /**
+     * 给 canalKafkaHandlerMap 添加元素
+     */
     private void putCanalKafkaHandlerMap(CanalKafkaHandlerKeyEnum canalKafkaHandlerKeyEnum,
         InterfaceCanalKafkaHandler canalKafkaHandler) {
 
