@@ -8,7 +8,6 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,7 +23,6 @@ import java.util.Set;
 @EnableGlobalMethodSecurity(prePostEnabled = true) // 开启 @PreAuthorize 权限注解
 @EnableWebSecurity
 @Slf4j
-@EnableConfigurationProperties(AuthProperties.class)
 public class SecurityConfiguration {
 
     @SneakyThrows

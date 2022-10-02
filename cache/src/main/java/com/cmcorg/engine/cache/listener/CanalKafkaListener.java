@@ -34,7 +34,7 @@ public class CanalKafkaListener {
     /**
      * 构造器：给 canalKafkaHandlerMap 添加元素
      */
-    public CanalKafkaListener(List<InterfaceCanalKafkaHandler> canalKafkaHandlerList) {
+    public CanalKafkaListener(List<InterfaceCanalKafkaHandler> interfaceCanalKafkaHandlerList) {
 
         for (CanalKafkaHandlerKeyEnum item : CanalKafkaHandlerKeyEnum.values()) {
             if (CollUtil.isEmpty(item.getDeleteRedisKeyEnumSet())) {
@@ -42,7 +42,7 @@ public class CanalKafkaListener {
             }
             // 添加一个 InterfaceCanalKafkaHandler，进行删除操作
             for (RedisKeyEnum subItem : item.getDeleteRedisKeyEnumSet()) {
-                putCanalKafkaHandlerMap(new InterfaceCanalKafkaHandler() {
+                putCanalKafkaHandlerMap(item, new InterfaceCanalKafkaHandler() {
                     @Override
                     public Set<CanalKafkaHandlerKeyEnum> getKeySet() {
                         return null;
@@ -54,27 +54,27 @@ public class CanalKafkaListener {
                             batch.getBucket(subItem.name()).deleteAsync();
                         }
                     }
-                }, item);
+                });
             }
         }
 
-        if (CollUtil.isEmpty(canalKafkaHandlerList)) {
+        if (CollUtil.isEmpty(interfaceCanalKafkaHandlerList)) {
             return;
         }
 
-        for (InterfaceCanalKafkaHandler item : canalKafkaHandlerList) {
+        for (InterfaceCanalKafkaHandler item : interfaceCanalKafkaHandlerList) {
             if (CollUtil.isEmpty(item.getKeySet())) {
                 continue;
             }
             for (CanalKafkaHandlerKeyEnum subItem : item.getKeySet()) {
-                putCanalKafkaHandlerMap(item, subItem);
+                putCanalKafkaHandlerMap(subItem, item);
             }
         }
 
     }
 
-    private void putCanalKafkaHandlerMap(InterfaceCanalKafkaHandler canalKafkaHandler,
-        CanalKafkaHandlerKeyEnum canalKafkaHandlerKeyEnum) {
+    private void putCanalKafkaHandlerMap(CanalKafkaHandlerKeyEnum canalKafkaHandlerKeyEnum,
+        InterfaceCanalKafkaHandler canalKafkaHandler) {
 
         List<InterfaceCanalKafkaHandler> handlerList =
             canalKafkaHandlerMap.getOrDefault(canalKafkaHandlerKeyEnum.getKey(), CollUtil.newArrayList());
