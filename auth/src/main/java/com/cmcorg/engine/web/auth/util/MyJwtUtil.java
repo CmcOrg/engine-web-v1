@@ -160,7 +160,7 @@ public class MyJwtUtil {
         }
 
         if (BaseConstant.ADMIN_ID.equals(userId)) {
-            userId = 1L;
+            return null;
         }
 
         // 通过用户 id，获取 菜单集合

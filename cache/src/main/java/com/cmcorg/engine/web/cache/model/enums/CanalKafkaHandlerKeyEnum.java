@@ -24,6 +24,10 @@ public enum CanalKafkaHandlerKeyEnum {
     game_project_sys_user("game_project.sys_user", CollUtil
         .newHashSet(RedisKeyEnum.USER_ID_JWT_SECRET_SUF_CACHE, RedisKeyEnum.USER_ID_REF_ROLE_ID_SET_CACHE)), // 用户表
 
+    game_project_sys_role("game_project.sys_role", CollUtil
+        .newHashSet(RedisKeyEnum.DEFAULT_ROLE_ID_CACHE, RedisKeyEnum.USER_ID_REF_ROLE_ID_SET_CACHE,
+            RedisKeyEnum.ROLE_REF_MENU_ID_SET_CACHE)), // 角色表
+
     ;
 
     private String name;
