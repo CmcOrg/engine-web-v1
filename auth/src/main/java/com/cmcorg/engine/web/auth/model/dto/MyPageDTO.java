@@ -11,10 +11,10 @@ import lombok.Data;
 public class MyPageDTO {
 
     @Schema(description = "第几页")
-    private Long current;
+    private long current = 1;
 
     @Schema(description = "每页显示条数")
-    private Long pageSize;
+    private long pageSize = 10;
 
     @Schema(description = "排序字段")
     private MyOrderDTO order;
