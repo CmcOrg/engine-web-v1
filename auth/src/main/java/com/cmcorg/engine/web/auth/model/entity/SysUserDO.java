@@ -1,10 +1,13 @@
 package com.cmcorg.engine.web.auth.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.cmcorg.engine.web.model.generate.model.annotation.RequestClass;
+import com.cmcorg.engine.web.model.generate.model.constant.WebModelConstant;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+@RequestClass(tableIgnoreFields = WebModelConstant.TABLE_IGNORE_FIELDS_ONE)
 @EqualsAndHashCode(callSuper = true)
 @TableName(value = "sys_user")
 @Data
