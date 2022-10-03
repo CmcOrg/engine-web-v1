@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.cmcorg.engine.auth.configuration.BaseConfiguration
+com.cmcorg.engine.web.auth.configuration.BaseConfiguration

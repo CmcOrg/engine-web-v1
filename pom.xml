@@ -39,6 +39,13 @@
     <dependencyManagement>
         <dependencies>
 
+            <!-- auth-nacos -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>auth-nacos</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <!-- log -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
