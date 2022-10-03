@@ -1,4 +1,4 @@
-package com.cmcorg.engine.web.model.model.annotation;
+package com.cmcorg.engine.web.model.generate.model.annotation;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.http.HttpMethod;

@@ -35,10 +35,18 @@
         <module>log</module>
         <module>auth-nacos</module>
         <module>email</module>
+        <module>model-generate</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+
+            <!-- model-generate -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>model-generate</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- email -->
             <dependency>

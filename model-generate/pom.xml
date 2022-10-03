@@ -9,22 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>model</artifactId>
-    <description>model</description>
+    <artifactId>model-generate</artifactId>
+    <description>model-generate</description>
 
     <dependencies>
-
-        <!-- model-generate -->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>model-generate</artifactId>
-        </dependency>
-
-        <!-- validation -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
 
         <!-- springdoc -->
         <dependency>

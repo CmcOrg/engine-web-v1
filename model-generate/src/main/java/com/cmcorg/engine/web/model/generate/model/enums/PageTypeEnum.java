@@ -1,4 +1,4 @@
-package com.cmcorg.engine.web.model.model.enums;
+package com.cmcorg.engine.web.model.generate.model.enums;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

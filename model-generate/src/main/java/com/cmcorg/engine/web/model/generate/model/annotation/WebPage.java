@@ -1,6 +1,6 @@
-package com.cmcorg.engine.web.model.model.annotation;
+package com.cmcorg.engine.web.model.generate.model.annotation;
 
-import com.cmcorg.engine.web.model.model.enums.PageTypeEnum;
+import com.cmcorg.engine.web.model.generate.model.enums.PageTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.lang.annotation.ElementType;

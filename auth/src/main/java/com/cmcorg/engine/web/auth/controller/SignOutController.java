@@ -2,8 +2,8 @@ package com.cmcorg.engine.web.auth.controller;
 
 import com.cmcorg.engine.web.auth.model.vo.ApiResultVO;
 import com.cmcorg.engine.web.auth.service.SignOutService;
-import com.cmcorg.engine.web.model.model.annotation.WebPage;
-import com.cmcorg.engine.web.model.model.enums.PageTypeEnum;
+import com.cmcorg.engine.web.model.generate.model.annotation.WebPage;
+import com.cmcorg.engine.web.model.generate.model.enums.PageTypeEnum;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PostMapping;

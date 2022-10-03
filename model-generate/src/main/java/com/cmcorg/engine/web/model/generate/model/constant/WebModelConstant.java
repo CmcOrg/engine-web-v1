@@ -1,4 +1,4 @@
-package com.cmcorg.engine.web.auth.model.constant;
+package com.cmcorg.engine.web.model.generate.model.constant;
 
 public interface WebModelConstant {
 
