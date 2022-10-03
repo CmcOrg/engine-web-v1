@@ -12,6 +12,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RequestField {
 
+    @Schema(description = "表单页面，是否是删除时的提示字段，备注：只会存在一个，会被后面的覆盖") boolean formDeleteNameFlag() default false;
+
     @Schema(description = "表单页面，字段显示用") String formTitle() default "";
 
     @Schema(description = "table页面，字段显示用") String tableTitle() default "";
