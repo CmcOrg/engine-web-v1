@@ -22,7 +22,7 @@ import java.util.*;
 
 @Component
 @KafkaListener(topics = {
-    "#{T(com.cmcorg.engine.kafka.enums.KafkaTopicEnum).CANAL_TOPIC.name()}"}, groupId = "#{T(com.cmcorg.engine.kafka.enums.KafkaTopicEnum).CANAL_TOPIC.name()}", batch = "true")
+    "#{T(com.cmcorg.engine.web.kafka.enums.KafkaTopicEnum).CANAL_TOPIC.name()}"}, groupId = "#{T(com.cmcorg.engine.web.kafka.enums.KafkaTopicEnum).CANAL_TOPIC.name()}", batch = "true")
 @Slf4j(topic = LogTopicConstant.CACHE)
 public class CanalKafkaListener {
 
