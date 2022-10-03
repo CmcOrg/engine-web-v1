@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.access.intercept.aopalliance.MethodSecurityInterceptor;
+import org.springframework.security.access.vote.AffirmativeBased;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,6 +26,11 @@ import java.util.Set;
 @EnableWebSecurity
 @Slf4j
 public class SecurityConfiguration {
+
+    public SecurityConfiguration(MethodSecurityInterceptor methodSecurityInterceptor) {
+        AffirmativeBased accessDecisionManager = (AffirmativeBased)methodSecurityInterceptor.getAccessDecisionManager();
+        accessDecisionManager.getDecisionVoters().add(0, new MyAccessDecisionVoter()); // 添加：自定义投票者
+    }
 
     @SneakyThrows
     @Bean
