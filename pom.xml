@@ -327,10 +327,12 @@
                                 <artifactId>annotations</artifactId>
                             </exclude>
                             <exclude>
-                                <dependency>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>generate-page-h5</artifactId>
-                                </dependency>
+                                <groupId>${project.groupId}</groupId>
+                                <artifactId>generate-page-h5</artifactId>
+                            </exclude>
+                            <exclude>
+                                <groupId>${project.groupId}</groupId>
+                                <artifactId>generate-page-h5-util</artifactId>
                             </exclude>
                         </excludes>
                     </configuration>
