@@ -326,6 +326,12 @@
                                 <groupId>org.jetbrains</groupId>
                                 <artifactId>annotations</artifactId>
                             </exclude>
+                            <exclude>
+                                <dependency>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>generate-page-h5</artifactId>
+                                </dependency>
+                            </exclude>
                         </excludes>
                     </configuration>
                 </plugin>
