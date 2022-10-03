@@ -6,7 +6,7 @@ import org.redisson.api.RBatch;
 
 import java.util.Set;
 
-public interface InterfaceCanalKafkaHandler {
+public interface ICanalKafkaHandler {
 
     /**
      * 类似：game_project.sys_menu 格式

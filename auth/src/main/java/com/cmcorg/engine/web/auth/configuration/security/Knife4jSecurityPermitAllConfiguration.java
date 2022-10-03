@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Set;
 
 @Configuration
-public class Knife4jSecurityPermitAllConfiguration implements InterfaceAuthPermitAllConfiguration {
+public class Knife4jSecurityPermitAllConfiguration implements IAuthPermitAllConfiguration {
 
     @Override
     public Set<String> devPermitAllSet() {

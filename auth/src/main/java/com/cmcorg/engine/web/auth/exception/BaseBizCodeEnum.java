@@ -29,7 +29,6 @@ public enum BaseBizCodeEnum implements IBizCode {
     PARENT_ID_CANNOT_BE_EQUAL_TO_ID(100121, "操作失败：parentId 不能等于 id"), //
     THE_ADMIN_ACCOUNT_DOES_NOT_SUPPORT_THIS_OPERATION(100131, "操作失败：admin 账号不支持此操作"), //
     OPERATION_TIMED_OUT_PLEASE_TRY_AGAIN(100161, "操作超时，请重新进行操作"), // 返回这个 code，前端会在步骤表单，往前返回步骤
-    EMAIL_DOES_NOT_EXIST_PLEASE_RE_ENTER(100201, "操作失败：邮箱不存在，请重新输入"), //
     PASSWORD_RESTRICTIONS(100211, "密码限制：必须包含大小写字母和数字，可以使用特殊字符，长度8-20"), //
     ;
 

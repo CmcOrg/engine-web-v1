@@ -26,7 +26,7 @@ public enum CanalKafkaHandlerKeyEnum {
     ;
 
     private String name;
-    private Set<RedisKeyEnum> deleteRedisKeyEnumSet; // 要移除的 redisKeySet，会默认添加 InterfaceCanalKafkaHandler，进行删除
+    private Set<RedisKeyEnum> deleteRedisKeyEnumSet; // 要移除的 redisKeySet，会默认添加 ICanalKafkaHandler，进行删除
 
     CanalKafkaHandlerKeyEnum(String name) {
         this.name = name;

@@ -29,15 +29,15 @@ public class SecurityConfiguration {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity,
         @Value("${spring.profiles.active:prod}") String profiles,
-        List<InterfaceAuthPermitAllConfiguration> interfaceAuthPermitAllConfigurationList,
-        RedissonClient redissonClient, AuthProperties authProperties) {
+        List<IAuthPermitAllConfiguration> iAuthPermitAllConfigurationList, RedissonClient redissonClient,
+        AuthProperties authProperties) {
 
         boolean prodFlag = "prod".equals(profiles);
 
         Set<String> permitAllSet = new HashSet<>();
 
-        if (CollUtil.isNotEmpty(interfaceAuthPermitAllConfigurationList)) {
-            for (InterfaceAuthPermitAllConfiguration item : interfaceAuthPermitAllConfigurationList) {
+        if (CollUtil.isNotEmpty(iAuthPermitAllConfigurationList)) {
+            for (IAuthPermitAllConfiguration item : iAuthPermitAllConfigurationList) {
                 if (prodFlag) {
                     CollUtil.addAll(permitAllSet, item.prodPermitAllSet());
                 } else {
