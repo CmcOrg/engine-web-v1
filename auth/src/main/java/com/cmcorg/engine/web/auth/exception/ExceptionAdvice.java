@@ -2,6 +2,7 @@ package com.cmcorg.engine.web.auth.exception;
 
 import cn.hutool.core.map.MapUtil;
 import com.cmcorg.engine.web.auth.model.vo.ApiResultVO;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -59,6 +60,23 @@ public class ExceptionAdvice {
         e.printStackTrace();
 
         return getBaseExceptionApiResult(e);
+    }
+
+    /**
+     * 权限不够时的异常处理
+     */
+    @ExceptionHandler(value = AccessDeniedException.class)
+    public ApiResultVO<?> handlerAccessDeniedException(AccessDeniedException e) {
+
+        e.printStackTrace();
+
+        try {
+            ApiResultVO.error(BaseBizCodeEnum.INSUFFICIENT_PERMISSIONS); // 这里肯定会抛出 BaseException异常
+        } catch (BaseException baseException) {
+            return getBaseExceptionApiResult(baseException);
+        }
+
+        return null; // 这里不会执行，只是为了通过语法检查
     }
 
     /**
