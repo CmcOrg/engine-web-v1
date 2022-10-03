@@ -11,10 +11,12 @@ import org.jetbrains.annotations.NotNull;
 @Getter
 @Schema(description = "请求类别")
 public enum RequestCategoryEnum {
+
     H5((byte)1, "H5（网页端）"), //
     APP((byte)2, "APP（移动端）"), //
     PC((byte)3, "PC（桌面程序）"), //
     WX_APP((byte)4, "微信小程序"), //
+
     ;
 
     @EnumValue

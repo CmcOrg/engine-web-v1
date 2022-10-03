@@ -23,6 +23,7 @@ public enum CanalKafkaTypeEnum {
     XACOMMIT, // 事务相关的暂时没有
     XAROLLBACK, //
     MHEARTBEAT, //
+
     ;
 
     private static final Set<CanalKafkaTypeEnum> DATE_UPDATE_SET =

@@ -8,6 +8,7 @@ public enum FormInputTypeEnum {
     TEXT, // 普通输入框
     SELECT, // 下拉框
     TREE_SELECT, // 树形下拉框
+
     ;
 
 }

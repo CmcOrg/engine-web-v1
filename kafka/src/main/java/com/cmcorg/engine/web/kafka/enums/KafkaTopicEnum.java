@@ -9,8 +9,10 @@ import lombok.AllArgsConstructor;
  */
 @AllArgsConstructor
 public enum KafkaTopicEnum {
+
     CANAL_TOPIC(null, null), // canal
     LOCAL_CACHE_TOPIC(null, TypeReferenceUtil.STRING_SET), // 本地缓存 topic
+
     ;
 
     private Class<?> clazz;

@@ -31,6 +31,7 @@ public enum RedisKeyEnum {
 
     // 其他 ↓
     ATOMIC_LONG_ID_ID_GENERATOR, // 获取主键 id，自增值
+
     ;
 
 }
