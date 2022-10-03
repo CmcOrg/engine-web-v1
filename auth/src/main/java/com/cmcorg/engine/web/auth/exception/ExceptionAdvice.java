@@ -8,7 +8,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.nio.file.AccessDeniedException;
 import java.util.Map;
 
 @RestControllerAdvice
@@ -60,23 +59,6 @@ public class ExceptionAdvice {
         e.printStackTrace();
 
         return getBaseExceptionApiResult(e);
-    }
-
-    /**
-     * 权限不够时的异常处理
-     */
-    @ExceptionHandler(value = AccessDeniedException.class)
-    public ApiResultVO<?> handlerAccessDeniedException(AccessDeniedException e) {
-
-        e.printStackTrace();
-
-        try {
-            ApiResultVO.error(BaseBizCodeEnum.INSUFFICIENT_PERMISSIONS); // 这里肯定会抛出 BaseException异常
-        } catch (BaseException baseException) {
-            return getBaseExceptionApiResult(baseException);
-        }
-
-        return null; // 这里不会执行，只是为了通过语法检查
     }
 
     /**
