@@ -12,7 +12,7 @@ import java.util.Date;
 public class BaseEntity {
 
     /**
-     * IdType.ASSIGN_ID，就是：{@link MybatisPlusConfiguration#idGenerator()}
+     * 这里是自定义的主键 id
      */
     @RequestField(tableIgnoreFlag = true)
     @TableId(type = IdType.ASSIGN_ID)
