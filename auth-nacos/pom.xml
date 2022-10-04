@@ -20,7 +20,7 @@
             <artifactId>auth</artifactId>
         </dependency>
 
-        <!-- SpringBoot2.4.x之后默认不加载bootstrap.yml文件，需要在pom里加上依赖 -->
+        <!-- SpringBoot2.4.x之后默认不加载bootstrap.yml文件，需要在 pom里加上依赖 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
