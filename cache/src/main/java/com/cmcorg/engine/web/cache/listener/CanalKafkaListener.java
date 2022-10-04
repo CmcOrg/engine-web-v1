@@ -1,6 +1,8 @@
 package com.cmcorg.engine.web.cache.listener;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.NumberUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.cmcorg.engine.web.cache.handler.ICanalKafkaHandler;
 import com.cmcorg.engine.web.cache.model.dto.CanalKafkaDTO;
@@ -105,6 +107,9 @@ public class CanalKafkaListener {
 
             String key = canalKafkaDTO.getDatabase() + "." + canalKafkaDTO.getTable();
 
+            // 处理 key
+            key = handlerKey(key);
+
             List<ICanalKafkaHandler> handlerList = canalKafkaHandlerMap.get(key);
 
             if (CollUtil.isNotEmpty(handlerList)) {
@@ -124,6 +129,30 @@ public class CanalKafkaListener {
         }
 
         acknowledgment.acknowledge();
+    }
+
+    /**
+     * 处理 key
+     */
+    private String handlerKey(String key) {
+
+        String underlineStr = "_";
+
+        List<String> splitTrimList = StrUtil.splitTrim(key, underlineStr);
+
+        if (CollUtil.isNotEmpty(splitTrimList)) {
+
+            String tableIndexStr = splitTrimList.get(splitTrimList.size() - 1);
+
+            if (NumberUtil.isNumber(tableIndexStr)) {
+                splitTrimList.remove(splitTrimList.size() - 1); // 移除：最后一个元素，即：分表的 index
+                // 重新：组装 key
+                return CollUtil.join(splitTrimList, underlineStr);
+            }
+
+        }
+
+        return key;
     }
 
 }

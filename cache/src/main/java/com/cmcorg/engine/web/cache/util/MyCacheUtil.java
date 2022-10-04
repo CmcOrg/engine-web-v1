@@ -43,7 +43,7 @@ public class MyCacheUtil {
     @NotNull
     public static Map<Long, String> getDefaultLongStringResultMap() {
         Map<Long, String> defaultResultMap = MapUtil.newHashMap();
-        defaultResultMap.put(BaseConstant.SYS_ID, null);
+        defaultResultMap.put(BaseConstant.SYS_ID, "");
         return defaultResultMap;
     }
 
@@ -62,7 +62,7 @@ public class MyCacheUtil {
         if (result == null) {
             log.info("MyCacheUtil：设置默认值：{}", defaultResult);
             result = defaultResult;
-        } else if (result instanceof Map && CollUtil.isEmpty((Map)result)) {
+        } else if (result instanceof Map && CollUtil.isEmpty((Map<?, ?>)result)) {
             log.info("MyCacheUtil：设置默认值：{}", defaultResult);
             result = defaultResult;
         }

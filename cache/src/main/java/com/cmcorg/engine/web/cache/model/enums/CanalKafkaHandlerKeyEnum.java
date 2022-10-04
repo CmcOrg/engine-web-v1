@@ -30,7 +30,7 @@ public enum CanalKafkaHandlerKeyEnum {
 
     ;
 
-    private String name;
+    private String name; // 备注：会截取后半段，判断是否是数字，例如：game_project.sys_user_0，则会变成：game_project.sys_user
     private Set<RedisKeyEnum> deleteRedisKeyEnumSet; // 要移除的 redisKeySet，会默认添加 ICanalKafkaHandler，进行删除
 
     CanalKafkaHandlerKeyEnum(String name) {
