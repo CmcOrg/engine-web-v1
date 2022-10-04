@@ -41,8 +41,8 @@ public class SysMenuDO extends BaseEntityTree<SysMenuDO> {
     @Schema(description = "是否外链，即，打开页面会在一个新的窗口打开")
     private Boolean linkFlag;
 
-    @RequestField(tableIgnoreFlag = true)
-    @Schema(description = "重定向，暂时未使用")
+    @RequestField(tableTitle = "重定向")
+    @Schema(description = "重定向，优先级最高")
     private String redirect;
 
     @RequestField(formTitle = "起始页面")

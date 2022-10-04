@@ -135,8 +135,9 @@ public class AuthUserUtil {
             allSysMenuDOList = ChainWrappers.lambdaQueryChain(sysMenuMapper)
                 .select(BaseEntity::getId, BaseEntityTree::getParentId, SysMenuDO::getPath, SysMenuDO::getIcon,
                     SysMenuDO::getRouter, SysMenuDO::getName, SysMenuDO::getFirstFlag, SysMenuDO::getLinkFlag,
-                    SysMenuDO::getShowFlag, SysMenuDO::getAuths, SysMenuDO::getAuthFlag, BaseEntityTree::getOrderNo)
-                .eq(BaseEntity::getEnableFlag, true).orderByDesc(BaseEntityTree::getOrderNo).list();
+                    SysMenuDO::getShowFlag, SysMenuDO::getAuths, SysMenuDO::getAuthFlag, BaseEntityTree::getOrderNo,
+                    SysMenuDO::getRedirect).eq(BaseEntity::getEnableFlag, true).orderByDesc(BaseEntityTree::getOrderNo)
+                .list();
         } else {
             allSysMenuDOList = getAllMenuIdAndAuthsList();
         }
