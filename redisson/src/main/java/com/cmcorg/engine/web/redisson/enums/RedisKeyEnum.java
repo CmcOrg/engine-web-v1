@@ -14,8 +14,8 @@ public enum RedisKeyEnum {
     PRE_EMAIL, // 邮箱：锁【邮箱】
     PRE_SIGN_IN_NAME, // 登录名：锁【登录名】
 
-    PRE_LOGIN_BLACK, // 登录黑名单：锁【用户主键 id】
-    PRE_LOGIN_ERROR_COUNT, // 登录错误总数：锁【用户主键 id】
+    PRE_TOO_MANY_PASSWORD_ERRORS, // 密码错误次数太多：锁【用户主键 id】
+    PRE_PASSWORD_ERROR_COUNT, // 密码错误总数：锁【用户主键 id】
 
     PRE_NETTY_TCP_PROTO_BUF_CONNECT_SECURITY_CODE, // netty tcp protoBuf 连接时的身份认证 code前端
 

@@ -28,6 +28,10 @@ public class MyEmailUtil {
     @Nullable
     public static String send(String to, EmailMessageEnum emailMessageEnum, String content, boolean isHtml) {
 
+        if (StrUtil.isBlank(to)) {
+            ApiResultVO.sysError(); // 因为这里 to字段都是由程序来赋值的，所以基本不会为空
+        }
+
         try {
 
             // 消息内容，加上统一的前缀
