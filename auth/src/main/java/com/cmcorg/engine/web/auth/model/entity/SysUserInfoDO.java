@@ -11,7 +11,7 @@ import lombok.Data;
 @Schema(description = "用户基本信息表")
 public class SysUserInfoDO {
 
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.ASSIGN_ID)
     @Schema(description = "用户主键 id")
     private Long id;
 
