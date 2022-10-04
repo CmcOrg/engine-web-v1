@@ -51,6 +51,10 @@ public class RedissonUtil {
      */
     private static RLock getMultiLock(String preName, Set<?> nameSet, RLock... locks) {
 
+        if (preName == null) {
+            preName = ""; // 防止：null 变成 "null"
+        }
+
         RLock[] lockArr;
         if (locks == null) {
             lockArr = new RLock[nameSet.size()];
