@@ -10,4 +10,6 @@ public interface LogTopicConstant {
 
     String NETTY = PRE_SYS + "netty"; // netty相关
 
+    String USER = PRE_SYS + "user"; // user相关
+
 }

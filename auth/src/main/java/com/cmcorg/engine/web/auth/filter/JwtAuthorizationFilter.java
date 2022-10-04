@@ -100,7 +100,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
         // 验证算法
         if (!jwt.verify()) {
-            return loginExpired(response); // 提示登录过期，请重新登录
+            return loginExpired(response); // 提示登录过期，请重新登录，目的：为了可以随时修改配置的 jwt前缀，或者用户 jwt后缀修改
         }
 
         try {
