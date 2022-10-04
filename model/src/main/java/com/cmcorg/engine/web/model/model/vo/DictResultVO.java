@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DictLongListVO {
-
-    @Schema(description = "显示用")
-    private String label;
+public class DictResultVO {
 
     @Schema(description = "传值用")
-    private Long value;
+    private Long id;
+
+    @Schema(description = "显示用")
+    private String name;
 
 }
