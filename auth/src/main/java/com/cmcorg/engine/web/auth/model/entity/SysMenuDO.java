@@ -38,7 +38,7 @@ public class SysMenuDO extends BaseEntityTree<SysMenuDO> {
     private Boolean showFlag;
 
     @RequestField(formTitle = "是否外链")
-    @Schema(description = "是否外链，即，打开页面会在一个新的窗口打开，可以配合 router")
+    @Schema(description = "是否外链，即，打开页面会在一个新的窗口打开")
     private Boolean linkFlag;
 
     @RequestField(tableIgnoreFlag = true)
