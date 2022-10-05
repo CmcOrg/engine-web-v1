@@ -37,7 +37,7 @@ public class IdGeneratorUtil {
         // 例如：20220928221425 -> 0220928221425
         String timeStr = DateUtil.format(new Date(), DatePattern.PURE_DATETIME_PATTERN).substring(1);
 
-        RAtomicLong atomicLong = redissonClient.getAtomicLong(RedisKeyEnum.ATOMIC_LONG_ID_ID_GENERATOR.name());
+        RAtomicLong atomicLong = redissonClient.getAtomicLong(RedisKeyEnum.ATOMIC_LONG_ID_GENERATOR.name());
 
         long incrementAndGet = atomicLong.incrementAndGet();
 

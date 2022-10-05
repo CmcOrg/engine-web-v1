@@ -27,7 +27,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.time.Instant;
+import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -116,11 +116,12 @@ public class IpFilter implements Filter {
         long incrementAndGet = atomicLong.incrementAndGet(); // 次数 + 1
 
         if (incrementAndGet == 1) {
-            atomicLong.expire(Instant.ofEpochMilli(timeInt)); // 等于 1表示，是第一次访问，则设置过期时间
+            atomicLong.expire(Duration.ofSeconds(timeInt)); // 等于 1表示，是第一次访问，则设置过期时间
             return null;
         }
 
         if (incrementAndGet > total) {
+            atomicLong.delete(); // 移除：ip的计数
             blackIpRedisBucket.set("黑名单 ip", BaseConstant.DAY_1_EXPIRE_TIME, TimeUnit.MILLISECONDS);
             return "1天";
         }

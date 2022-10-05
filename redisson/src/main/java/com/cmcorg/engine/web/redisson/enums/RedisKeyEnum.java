@@ -33,7 +33,7 @@ public enum RedisKeyEnum {
     SYS_PARAM_CACHE, // 系统参数缓存
 
     // 其他 ↓
-    ATOMIC_LONG_ID_ID_GENERATOR, // 获取主键 id，自增值
+    ATOMIC_LONG_ID_GENERATOR, // 获取主键 id，自增值
 
     ;
 
