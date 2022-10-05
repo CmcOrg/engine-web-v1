@@ -28,6 +28,8 @@ public enum CanalKafkaHandlerKeyEnum {
         .newHashSet(RedisKeyEnum.DEFAULT_ROLE_ID_CACHE, RedisKeyEnum.USER_ID_REF_ROLE_ID_SET_CACHE,
             RedisKeyEnum.ROLE_REF_MENU_ID_SET_CACHE)), // 角色表
 
+    game_project_sys_param("game_project.sys_param", CollUtil.newHashSet(RedisKeyEnum.SYS_PARAM_CACHE)), // 系统参数表
+
     ;
 
     private String name; // 备注：会截取后半段，判断是否是数字，例如：game_project.sys_user_0，则会变成：game_project.sys_user
