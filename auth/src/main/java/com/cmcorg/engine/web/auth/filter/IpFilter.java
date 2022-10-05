@@ -71,17 +71,17 @@ public class IpFilter implements Filter {
      */
     private String ipCheckHandler(String ip) {
 
-        RBucket<String> bucket = redissonClient.getBucket(RedisKeyEnum.PRE_IP_BLACK + ip);
+        RBucket<String> blackIpRedisBucket = redissonClient.getBucket(RedisKeyEnum.PRE_IP_BLACK + ip);
 
         // 判断是否在 黑名单里
-        long remainTimeToLive = bucket.remainTimeToLive();
+        long remainTimeToLive = blackIpRedisBucket.remainTimeToLive();
 
         if (remainTimeToLive > -1) {
             // 如果在 黑名单里，则返回剩余时间
             return DateUtil.formatBetween(remainTimeToLive, BetweenFormatter.Level.SECOND); // 剩余时间（字符串）
         }
 
-        return setRedisTotal(ip, bucket);
+        return setRedisTotal(ip, blackIpRedisBucket);
 
     }
 
