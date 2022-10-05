@@ -2,6 +2,7 @@ package com.cmcorg.engine.web.auth.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.cmcorg.engine.web.model.generate.model.annotation.RequestClass;
+import com.cmcorg.engine.web.model.generate.model.annotation.RequestField;
 import com.cmcorg.engine.web.model.generate.model.constant.WebModelConstant;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -14,6 +15,7 @@ import lombok.EqualsAndHashCode;
 @Schema(description = "用户主表")
 public class SysUserDO extends BaseEntity {
 
+    @RequestField(formTitle = "是否正常")
     @Schema(description = "正常/冻结")
     private Boolean enableFlag;
 
