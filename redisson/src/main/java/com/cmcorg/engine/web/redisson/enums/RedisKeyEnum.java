@@ -9,6 +9,9 @@ package com.cmcorg.engine.web.redisson.enums;
 public enum RedisKeyEnum {
 
     // 【PRE_】开头 ↓
+    PRE_IP_BLACK, // ip黑名单前端，后面跟 ip
+    PRE_IP_TOTAL_CHECK, // ip 请求总数，key前缀，后面跟 ip
+
     PRE_JWT_HASH, // jwtHash 前缀
 
     PRE_EMAIL, // 邮箱：锁【邮箱】
