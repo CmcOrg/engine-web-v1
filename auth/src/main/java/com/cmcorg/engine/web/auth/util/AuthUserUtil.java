@@ -2,12 +2,10 @@ package com.cmcorg.engine.web.auth.util;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.toolkit.ChainWrappers;
 import com.cmcorg.engine.web.auth.exception.BaseBizCodeEnum;
-import com.cmcorg.engine.web.auth.mapper.SysMenuMapper;
-import com.cmcorg.engine.web.auth.mapper.SysRoleMapper;
-import com.cmcorg.engine.web.auth.mapper.SysRoleRefMenuMapper;
-import com.cmcorg.engine.web.auth.mapper.SysRoleRefUserMapper;
+import com.cmcorg.engine.web.auth.mapper.*;
 import com.cmcorg.engine.web.auth.model.entity.*;
 import com.cmcorg.engine.web.auth.model.vo.ApiResultVO;
 import com.cmcorg.engine.web.cache.util.MyCacheUtil;
@@ -31,13 +29,16 @@ public class AuthUserUtil {
     private static SysRoleMapper sysRoleMapper;
     private static SysRoleRefMenuMapper sysRoleRefMenuMapper;
     private static SysRoleRefUserMapper sysRoleRefUserMapper;
+    private static SysUserMapper sysUserMapper;
 
     public AuthUserUtil(SysMenuMapper sysMenuMapper, SysRoleMapper sysRoleMapper,
-        SysRoleRefMenuMapper sysRoleRefMenuMapper, SysRoleRefUserMapper sysRoleRefUserMapper) {
+        SysRoleRefMenuMapper sysRoleRefMenuMapper, SysRoleRefUserMapper sysRoleRefUserMapper,
+        SysUserMapper sysUserMapper) {
         AuthUserUtil.sysMenuMapper = sysMenuMapper;
         AuthUserUtil.sysRoleMapper = sysRoleMapper;
         AuthUserUtil.sysRoleRefMenuMapper = sysRoleRefMenuMapper;
         AuthUserUtil.sysRoleRefUserMapper = sysRoleRefUserMapper;
+        AuthUserUtil.sysUserMapper = sysUserMapper;
     }
 
     /**
@@ -54,6 +55,24 @@ public class AuthUserUtil {
         }
 
         return userId;
+    }
+
+    /**
+     * 获取当前用户的 邮箱，如果是 admin账号，则会报错，只会当前用户的 邮箱，不会返回 null
+     */
+    @NotNull
+    public static String getCurrentUserEmailNotAdmin() {
+
+        Long currentUserIdNotAdmin = getCurrentUserIdNotAdmin();
+
+        SysUserDO sysUserDO = ChainWrappers.lambdaQueryChain(sysUserMapper).eq(BaseEntity::getId, currentUserIdNotAdmin)
+            .select(SysUserDO::getEmail).one();
+
+        if (sysUserDO == null || StrUtil.isBlank(sysUserDO.getEmail())) {
+            ApiResultVO.error("操作失败：当前用户没有绑定邮箱");
+        }
+
+        return sysUserDO.getEmail();
     }
 
     /**
