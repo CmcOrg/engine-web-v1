@@ -12,6 +12,14 @@ import java.util.Map;
 public class MyEntityUtil {
 
     /**
+     * 获取不为 null对象，并且去掉前后空格的 字符串
+     */
+    @NotNull
+    public static String getNotNullAdnTrimStr(String str) {
+        return getNotNullStr(StrUtil.trim(str), "");
+    }
+
+    /**
      * 获取不为 null对象的 字符串
      */
     @NotNull
