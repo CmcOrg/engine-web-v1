@@ -7,6 +7,7 @@ import com.cmcorg.engine.web.auth.properties.AuthProperties;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RedissonClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.intercept.aopalliance.MethodSecurityInterceptor;
@@ -27,9 +28,12 @@ import java.util.Set;
 @Slf4j
 public class SecurityConfiguration {
 
-    public SecurityConfiguration(MethodSecurityInterceptor methodSecurityInterceptor) {
-        AffirmativeBased accessDecisionManager = (AffirmativeBased)methodSecurityInterceptor.getAccessDecisionManager();
-        accessDecisionManager.getDecisionVoters().add(0, new MyAccessDecisionVoter()); // 添加：自定义投票者
+    public SecurityConfiguration(@Autowired(required = false) MethodSecurityInterceptor methodSecurityInterceptor) {
+        if (methodSecurityInterceptor != null) {
+            AffirmativeBased accessDecisionManager =
+                (AffirmativeBased)methodSecurityInterceptor.getAccessDecisionManager();
+            accessDecisionManager.getDecisionVoters().add(0, new MyAccessDecisionVoter()); // 添加：自定义投票者
+        }
     }
 
     @SneakyThrows
