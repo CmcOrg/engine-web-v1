@@ -37,10 +37,18 @@
         <module>email</module>
         <module>model-generate</module>
         <module>netty-boot</module>
+        <module>ip2region</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+
+            <!-- ip2region -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>ip2region</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- netty-boot -->
             <dependency>
@@ -170,7 +178,7 @@
                 <version>5.2.0</version>
             </dependency>
 
-            <!-- protobuf -->
+            <!-- protobuf：下载地址例如：https://github.com/protocolbuffers/protobuf/releases/tag/v21.7 -->
             <dependency>
                 <groupId>com.google.protobuf</groupId>
                 <artifactId>protobuf-java</artifactId>
