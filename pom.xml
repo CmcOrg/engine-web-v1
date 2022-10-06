@@ -36,10 +36,18 @@
         <module>auth-nacos</module>
         <module>email</module>
         <module>model-generate</module>
+        <module>netty-boot</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+
+            <!-- netty-boot -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>netty-boot</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- model-generate -->
             <dependency>

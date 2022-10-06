@@ -92,7 +92,7 @@ public class AuthUserUtil {
     }
 
     /**
-     * 这里只会返回实际的 userId 或者 -1，备注：-1表示没有 用户id，则是大多数情况下，表示的是 系统
+     * 这里只会返回实际的 userId 或者 -1，备注：-1表示没有 用户id，在大多数情况下，表示的是 系统
      */
     @NotNull
     public static Long getCurrentUserIdDefault() {
