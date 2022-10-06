@@ -69,7 +69,7 @@ public class AuthUserUtil {
             .select(SysUserDO::getEmail).one();
 
         if (sysUserDO == null || StrUtil.isBlank(sysUserDO.getEmail())) {
-            ApiResultVO.error("操作失败：您还没有绑定邮箱");
+            ApiResultVO.error(BaseBizCodeEnum.UNABLE_TO_SEND_VERIFICATION_CODE_BECAUSE_THE_EMAIL_ADDRESS_IS_NOT_BOUND);
         }
 
         return sysUserDO.getEmail();
