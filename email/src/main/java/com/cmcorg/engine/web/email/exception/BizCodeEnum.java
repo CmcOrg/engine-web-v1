@@ -9,6 +9,7 @@ import lombok.Getter;
 public enum BizCodeEnum implements IBizCode {
 
     EMAIL_DOES_NOT_EXIST_PLEASE_RE_ENTER(300011, "操作失败：邮箱不存在，请重新输入"), //
+    EMAIL_NOT_REGISTERED(300021, "操作失败：邮箱未注册，请重新输入"), //
 
     ;
 
