@@ -10,8 +10,9 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.AttributeKey;
 import io.netty.util.ReferenceCountUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.Nullable;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -21,9 +22,6 @@ import java.util.function.Consumer;
 @ChannelHandler.Sharable
 @Slf4j(topic = LogTopicConstant.NETTY)
 public abstract class AbstractNettyServerHandler extends ChannelInboundHandlerAdapter {
-
-    // 当前用户 id
-    private static final ThreadLocal<Long> USER_ID_THREAD_LOCAL = new ThreadLocal<>();
 
     // 没有进行身份认证的通道，一般这种通道，业务可以忽略，备注：一定时间内，会关闭此类型通道
     private static final Map<String, Channel> NOT_SECURITY_CHANNEL_MAP = MapUtil.newConcurrentHashMap();
@@ -118,24 +116,17 @@ public abstract class AbstractNettyServerHandler extends ChannelInboundHandlerAd
                 return;
             }
 
-            USER_ID_THREAD_LOCAL.set(userId); // 设置：用户 id
+            // 把 userId设置到：security的上下文里面
+            SecurityContextHolder.getContext()
+                .setAuthentication(new UsernamePasswordAuthenticationToken(userId, null, null));
 
             handlerMessage(msg);// 处理：进行了身份认证的通道的消息
 
         } catch (Throwable e) {
             exceptionAdvice(e); // 处理业务异常
         } finally {
-            USER_ID_THREAD_LOCAL.remove(); // 清除：用户 id
             ReferenceCountUtil.release(msg); // 释放资源
         }
-    }
-
-    /**
-     * 获取：当前用户 id
-     */
-    @Nullable
-    public static Long getCurrentUserId() {
-        return USER_ID_THREAD_LOCAL.get();
     }
 
     /**
