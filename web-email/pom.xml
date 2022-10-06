@@ -9,21 +9,21 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>netty-boot</artifactId>
-    <description>netty-boot</description>
+    <artifactId>web-email</artifactId>
+    <description>email</description>
 
     <dependencies>
 
-        <!-- netty -->
+        <!-- mail -->
         <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
         </dependency>
 
-        <!-- auth-nacos -->
+        <!-- web-auth -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>auth-nacos</artifactId>
+            <artifactId>web-auth</artifactId>
         </dependency>
 
     </dependencies>

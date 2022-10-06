@@ -9,15 +9,21 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>model-generate</artifactId>
-    <description>model-generate</description>
+    <artifactId>web-log</artifactId>
+    <description>web-log</description>
 
     <dependencies>
 
-        <!-- springdoc -->
+        <!-- web-model -->
         <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-ui</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>web-model</artifactId>
+        </dependency>
+
+        <!-- nacos-config -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
 
     </dependencies>

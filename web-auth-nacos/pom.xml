@@ -9,15 +9,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>auth-nacos</artifactId>
-    <description>auth-nacos</description>
+    <artifactId>web-auth-nacos</artifactId>
+    <description>web-auth-nacos</description>
 
     <dependencies>
 
-        <!-- auth -->
+        <!-- web-auth -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>auth</artifactId>
+            <artifactId>web-auth</artifactId>
         </dependency>
 
         <!-- SpringBoot2.4.x之后默认不加载bootstrap.yml文件，需要在 pom里加上依赖 -->

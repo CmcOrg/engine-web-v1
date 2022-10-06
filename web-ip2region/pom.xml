@@ -9,31 +9,23 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>datasource</artifactId>
-    <description>datasource</description>
+    <artifactId>web-ip2region</artifactId>
+    <description>web-ip2region</description>
 
     <dependencies>
 
-        <!-- mysql -->
+        <!-- hutool工具包 -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
         </dependency>
 
-        <!-- sharding-jdbc -->
+        <!-- 离线IP地址定位库 -->
         <dependency>
-            <groupId>org.apache.shardingsphere</groupId>
-            <artifactId>shardingsphere-jdbc-core-spring-boot-starter</artifactId>
-        </dependency>
-
-        <!-- mybatis-plus -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <groupId>org.lionsoul</groupId>
+            <artifactId>ip2region</artifactId>
         </dependency>
 
     </dependencies>
-
 
 </project>

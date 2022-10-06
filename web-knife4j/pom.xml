@@ -9,18 +9,18 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>knife4j</artifactId>
-    <description>knife4j</description>
+    <artifactId>web-knife4j</artifactId>
+    <description>web-knife4j</description>
 
     <dependencies>
 
-        <!-- model -->
+        <!-- web-model -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>model</artifactId>
+            <artifactId>web-model</artifactId>
         </dependency>
 
-        <!-- knife4j -->
+        <!-- web-knife4j -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-springdoc-ui</artifactId>

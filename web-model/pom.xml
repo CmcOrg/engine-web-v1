@@ -9,15 +9,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>model</artifactId>
-    <description>model</description>
+    <artifactId>web-model</artifactId>
+    <description>web-model</description>
 
     <dependencies>
 
-        <!-- model-generate -->
+        <!-- web-model-generate -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>model-generate</artifactId>
+            <artifactId>web-model-generate</artifactId>
         </dependency>
 
         <!-- validation -->

@@ -9,27 +9,27 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cache</artifactId>
+    <artifactId>web-cache</artifactId>
     <description>缓存模块</description>
 
     <dependencies>
 
-        <!-- log -->
+        <!-- web-log -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>log</artifactId>
+            <artifactId>web-log</artifactId>
         </dependency>
 
-        <!-- redisson -->
+        <!-- web-redisson -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>redisson</artifactId>
+            <artifactId>web-redisson</artifactId>
         </dependency>
 
-        <!-- kafka -->
+        <!-- web-kafka -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>kafka</artifactId>
+            <artifactId>web-kafka</artifactId>
         </dependency>
 
         <!-- caffeine -->

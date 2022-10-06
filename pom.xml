@@ -24,127 +24,127 @@
     </properties>
 
     <modules>
-        <module>cache</module>
-        <module>redisson</module>
-        <module>model</module>
-        <module>knife4j</module>
-        <module>util</module>
-        <module>datasource</module>
-        <module>auth</module>
-        <module>kafka</module>
-        <module>log</module>
-        <module>auth-nacos</module>
-        <module>email</module>
-        <module>model-generate</module>
-        <module>netty-boot</module>
-        <module>ip2region</module>
+        <module>web-cache</module>
+        <module>web-redisson</module>
+        <module>web-model</module>
+        <module>web-knife4j</module>
+        <module>web-util</module>
+        <module>web-datasource</module>
+        <module>web-auth</module>
+        <module>web-kafka</module>
+        <module>web-log</module>
+        <module>web-auth-nacos</module>
+        <module>web-email</module>
+        <module>web-model-generate</module>
+        <module>web-netty-boot</module>
+        <module>web-ip2region</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
 
-            <!-- ip2region -->
+            <!-- web-ip2region -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>ip2region</artifactId>
+                <artifactId>web-ip2region</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
-            <!-- netty-boot -->
+            <!-- web-netty-boot -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>netty-boot</artifactId>
+                <artifactId>web-netty-boot</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
-            <!-- model-generate -->
+            <!-- web-model-generate -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>model-generate</artifactId>
+                <artifactId>web-model-generate</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
-            <!-- email -->
+            <!-- web-email -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>email</artifactId>
+                <artifactId>web-email</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
-            <!-- auth-nacos -->
+            <!-- web-auth-nacos -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>auth-nacos</artifactId>
+                <artifactId>web-auth-nacos</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
-            <!-- log -->
+            <!-- web-log -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>auth-nacos</artifactId>
+                <artifactId>web-auth-nacos</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
-            <!-- log -->
+            <!-- web-log -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>log</artifactId>
+                <artifactId>web-log</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
-            <!-- kafka -->
+            <!-- web-kafka -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>kafka</artifactId>
+                <artifactId>web-kafka</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
-            <!-- auth -->
+            <!-- web-auth -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>auth</artifactId>
+                <artifactId>web-auth</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
-            <!-- datasource -->
+            <!-- web-datasource -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>datasource</artifactId>
+                <artifactId>web-datasource</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
-            <!-- util -->
+            <!-- web-util -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>util</artifactId>
+                <artifactId>web-util</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
-            <!-- knife4j -->
+            <!-- web-knife4j -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>knife4j</artifactId>
+                <artifactId>web-knife4j</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
-            <!-- model -->
+            <!-- web-model -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>model</artifactId>
+                <artifactId>web-model</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
-            <!-- redisson -->
+            <!-- web-redisson -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>redisson</artifactId>
+                <artifactId>web-redisson</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
-            <!-- cache -->
+            <!-- web-cache -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>cache</artifactId>
+                <artifactId>web-cache</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -234,7 +234,7 @@
                 <version>1.6.2</version>
             </dependency>
 
-            <!-- redisson -->
+            <!-- redisson-spring-boot-starter -->
             <dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson-spring-boot-starter</artifactId>

@@ -9,23 +9,31 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>email</artifactId>
-    <description>email</description>
+    <artifactId>web-datasource</artifactId>
+    <description>web-datasource</description>
 
     <dependencies>
 
-        <!-- mail -->
+        <!-- mysql -->
         <dependency>
-            <groupId>com.sun.mail</groupId>
-            <artifactId>javax.mail</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
-        <!-- auth -->
+        <!-- sharding-jdbc -->
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>auth</artifactId>
+            <groupId>org.apache.shardingsphere</groupId>
+            <artifactId>shardingsphere-jdbc-core-spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- mybatis-plus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
 
     </dependencies>
+
 
 </project>

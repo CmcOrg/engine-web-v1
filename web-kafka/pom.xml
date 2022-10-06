@@ -9,21 +9,27 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ip2region</artifactId>
-    <description>ip2region</description>
+    <artifactId>web-kafka</artifactId>
+    <description>web-kafka</description>
 
     <dependencies>
 
-        <!-- hutool工具包 -->
+        <!-- web-util -->
         <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>web-util</artifactId>
         </dependency>
 
-        <!-- 离线IP地址定位库 -->
+        <!-- web-model -->
         <dependency>
-            <groupId>org.lionsoul</groupId>
-            <artifactId>ip2region</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>web-model</artifactId>
+        </dependency>
+
+        <!-- web-kafka -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
         </dependency>
 
     </dependencies>

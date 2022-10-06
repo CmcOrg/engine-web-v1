@@ -9,27 +9,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>kafka</artifactId>
-    <description>kafka</description>
+    <artifactId>web-model-generate</artifactId>
+    <description>web-model-generate</description>
 
     <dependencies>
 
-        <!-- util -->
+        <!-- springdoc -->
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>util</artifactId>
-        </dependency>
-
-        <!-- model -->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>model</artifactId>
-        </dependency>
-
-        <!-- kafka -->
-        <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
         </dependency>
 
     </dependencies>
