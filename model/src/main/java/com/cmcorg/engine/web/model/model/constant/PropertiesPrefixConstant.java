@@ -10,4 +10,6 @@ public interface PropertiesPrefixConstant {
 
     String SYS_LOG = PRE_SYS + "log"; // 日志相关
 
+    String SYS_CACHE = PRE_SYS + "cache"; // 缓存相关
+
 }

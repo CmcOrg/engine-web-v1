@@ -7,6 +7,7 @@ import cn.hutool.json.JSONUtil;
 import com.cmcorg.engine.web.cache.handler.ICanalKafkaHandler;
 import com.cmcorg.engine.web.cache.model.dto.CanalKafkaDTO;
 import com.cmcorg.engine.web.cache.model.enums.CanalKafkaHandlerKeyEnum;
+import com.cmcorg.engine.web.cache.properties.CacheProperties;
 import com.cmcorg.engine.web.kafka.enums.KafkaTopicEnum;
 import com.cmcorg.engine.web.kafka.util.KafkaUtil;
 import com.cmcorg.engine.web.model.model.constant.LogTopicConstant;
@@ -33,10 +34,14 @@ public class CanalKafkaListener {
 
     private final Map<String, List<ICanalKafkaHandler>> canalKafkaHandlerMap = new HashMap<>();
 
+    public static CacheProperties cacheProperties;
+
     /**
      * 构造器：给 canalKafkaHandlerMap 添加元素
      */
-    public CanalKafkaListener(List<ICanalKafkaHandler> iCanalKafkaHandlerList) {
+    public CanalKafkaListener(List<ICanalKafkaHandler> iCanalKafkaHandlerList, CacheProperties cacheProperties) {
+
+        CanalKafkaListener.cacheProperties = cacheProperties;
 
         for (CanalKafkaHandlerKeyEnum item : CanalKafkaHandlerKeyEnum.values()) {
             if (CollUtil.isEmpty(item.getDeleteRedisKeyEnumSet())) {

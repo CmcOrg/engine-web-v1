@@ -9,7 +9,7 @@ import java.util.Set;
 public interface ICanalKafkaHandler {
 
     /**
-     * 类似：game_project.sys_menu 格式
+     * 类似：cmcorg.sys_menu 格式
      */
     Set<CanalKafkaHandlerKeyEnum> getKeySet();
 
