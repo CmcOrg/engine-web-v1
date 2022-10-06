@@ -34,7 +34,7 @@ public class CanalKafkaListener {
 
     private final Map<String, List<ICanalKafkaHandler>> canalKafkaHandlerMap = new HashMap<>();
 
-    public static CacheProperties cacheProperties;
+    public static CacheProperties cacheProperties; // 为了组装：完整的数据库 + 表名
 
     /**
      * 构造器：给 canalKafkaHandlerMap 添加元素
