@@ -69,7 +69,7 @@ public class AuthUserUtil {
             .select(SysUserDO::getEmail).one();
 
         if (sysUserDO == null || StrUtil.isBlank(sysUserDO.getEmail())) {
-            ApiResultVO.error("操作失败：当前用户没有绑定邮箱");
+            ApiResultVO.error("操作失败：您还没有绑定邮箱");
         }
 
         return sysUserDO.getEmail();
