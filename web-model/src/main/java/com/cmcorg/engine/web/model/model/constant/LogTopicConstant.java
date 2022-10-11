@@ -12,4 +12,8 @@ public interface LogTopicConstant {
 
     String USER = PRE_SYS + "user"; // user相关
 
+    String PRE_GAME = "game.";
+
+    String ROOM_CURRENT = PRE_GAME + "roomCurrent"; // 当前房间相关
+
 }
