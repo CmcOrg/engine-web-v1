@@ -16,4 +16,7 @@ public class CommonProperties {
     @Schema(description = "平台名称")
     private String platformName = "CmcOrg";
 
+    @Schema(description = "外网：ip/域名")
+    private String internetAddress = "127.0.0.1";
+
 }
