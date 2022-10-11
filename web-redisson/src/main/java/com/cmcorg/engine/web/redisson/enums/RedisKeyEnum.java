@@ -20,7 +20,7 @@ public enum RedisKeyEnum {
     PRE_TOO_MANY_PASSWORD_ERRORS, // 密码错误次数太多：锁【用户主键 id】
     PRE_PASSWORD_ERROR_COUNT, // 密码错误总数：锁【用户主键 id】
 
-    PRE_NETTY_TCP_PROTO_BUF_CONNECT_SECURITY_CODE, // netty tcp protoBuf 连接时的身份认证 code前端
+    PRE_NETTY_TCP_PROTO_BUF_CONNECT_SECURITY_CODE, // netty tcp protoBuf 连接时的身份认证 code前缀
 
     // 【_CACHE】结尾 ↓
     USER_ID_JWT_SECRET_SUF_CACHE, // 用户 id和 jwt私钥后缀
