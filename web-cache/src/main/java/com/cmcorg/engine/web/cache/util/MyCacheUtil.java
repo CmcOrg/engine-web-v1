@@ -7,6 +7,7 @@ import cn.hutool.core.map.MapUtil;
 import com.cmcorg.engine.web.model.model.constant.BaseConstant;
 import com.cmcorg.engine.web.model.model.constant.LogTopicConstant;
 import com.cmcorg.engine.web.redisson.enums.RedisKeyEnum;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.redisson.api.RBatch;
@@ -17,7 +18,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Supplier;
 
 /**
  * 缓存工具类
@@ -73,37 +73,46 @@ public class MyCacheUtil {
     /**
      * 获取：一般类型的缓存
      */
+    @SneakyThrows
     @NotNull
     public static <T> T getCache(RedisKeyEnum redisKeyEnum, T defaultResult, @NotNull Func0<T> supplier) {
 
-        Object result = cache.get(redisKeyEnum, () -> {
+        T result = (T)cache.get(redisKeyEnum);
 
-            log.info("{}：读取 redis缓存", redisKeyEnum.name());
-            T value = redissonClient.<T>getBucket(redisKeyEnum.name()).get();
-            if (value != null) {
-                return value; // 返回 redis缓存
-            }
+        if (result != null) {
+            log.info("{}：返回 本地缓存", redisKeyEnum.name());
+            return result;
+        }
 
+        result = (T)redissonClient.getBucket(redisKeyEnum.name()).get();
+
+        if (result == null) {
             log.info("{}：读取数据库数据", redisKeyEnum.name());
-            value = supplier.call();
+            result = supplier.call();
+        } else {
+            log.info("{}：加入 本地缓存，并返回 redis缓存", redisKeyEnum.name());
+            cache.put(redisKeyEnum, result);
+            return result;
+        }
 
-            value = checkAndReturnResult(value, defaultResult); // 检查并返回值，目的：防止缓存不写入数据
+        result = checkAndReturnResult(result, defaultResult); // 检查并设置为默认值
 
-            log.info("{}：加入到 redis缓存中", redisKeyEnum.name());
-            redissonClient.<T>getBucket(redisKeyEnum.name()).set(value);
+        log.info("{}：加入 redis缓存", redisKeyEnum.name());
+        redissonClient.getBucket(redisKeyEnum.name()).set(result); // 先加入到 redis里
 
-            return value; // 会自动设置到本地缓存中
-        });
+        log.info("{}：加入 本地缓存", redisKeyEnum.name());
+        cache.put(redisKeyEnum, result);
 
-        return (T)result;
+        return result;
     }
 
     /**
      * 获取：map类型的缓存
      */
+    @SneakyThrows
     @NotNull
     public static <T extends Map<?, ?>> T getMapCache(RedisKeyEnum redisKeyEnum, T defaultResultMap,
-        @NotNull Supplier<T> supplier) {
+        @NotNull Func0<T> supplier) {
 
         T resultMap = (T)cache.get(redisKeyEnum);
 
@@ -122,12 +131,12 @@ public class MyCacheUtil {
         }
 
         log.info("{}：读取数据库数据", redisKeyEnum.name());
-        resultMap = supplier.get();
+        resultMap = supplier.call();
 
         resultMap = checkAndReturnResult(resultMap, defaultResultMap); // 检查并设置为默认值
 
         log.info("{}：加入 redis缓存", redisKeyEnum.name());
-        RBatch batch = redissonClient.createBatch(); // 优先保证 redis里面成功写入
+        RBatch batch = redissonClient.createBatch(); // 先加入到 redis里
         batch.getMap(redisKeyEnum.name()).deleteAsync();
         batch.getMap(redisKeyEnum.name()).putAllAsync(resultMap);
         batch.execute();
@@ -141,9 +150,10 @@ public class MyCacheUtil {
     /**
      * 获取：list类型的缓存
      */
+    @SneakyThrows
     @NotNull
     public static <T extends List<?>> T getListCache(RedisKeyEnum redisKeyEnum, T defaultResultList,
-        @NotNull Supplier<T> supplier) {
+        @NotNull Func0<T> supplier) {
 
         T resultList = (T)cache.get(redisKeyEnum);
 
@@ -161,12 +171,12 @@ public class MyCacheUtil {
         }
 
         log.info("{}：读取数据库数据", redisKeyEnum.name());
-        resultList = supplier.get();
+        resultList = supplier.call();
 
         resultList = checkAndReturnResult(resultList, defaultResultList); // 检查并设置为默认值
 
         log.info("{}：加入 redis缓存", redisKeyEnum.name());
-        RBatch batch = redissonClient.createBatch(); // 优先保证 redis里面成功写入
+        RBatch batch = redissonClient.createBatch(); // 先加入到 redis里
         batch.getList(redisKeyEnum.name()).deleteAsync();
         batch.getList(redisKeyEnum.name()).addAllAsync(resultList);
         batch.execute();
