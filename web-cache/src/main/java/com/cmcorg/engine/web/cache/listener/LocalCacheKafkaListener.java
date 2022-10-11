@@ -1,11 +1,11 @@
 package com.cmcorg.engine.web.cache.listener;
 
+import cn.hutool.cache.Cache;
 import cn.hutool.json.JSONUtil;
 import com.cmcorg.engine.web.cache.model.enums.CanalKafkaHandlerKeyEnum;
 import com.cmcorg.engine.web.model.model.constant.LogTopicConstant;
 import com.cmcorg.engine.web.redisson.enums.RedisKeyEnum;
 import com.cmcorg.engine.web.util.util.TypeReferenceUtil;
-import com.github.benmanes.caffeine.cache.Cache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -39,7 +39,9 @@ public class LocalCacheKafkaListener {
 
         if (redisKeyEnumSet.size() != 0) {
             log.info("canal：清除 本地缓存：{}", redisKeyEnumSet);
-            cache.invalidateAll(redisKeyEnumSet); // 清除本地缓存
+            for (RedisKeyEnum item : redisKeyEnumSet) {
+                cache.remove(item); // 清除本地缓存
+            }
         }
 
         acknowledgment.acknowledge();

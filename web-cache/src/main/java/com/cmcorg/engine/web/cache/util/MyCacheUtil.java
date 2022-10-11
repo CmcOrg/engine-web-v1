@@ -1,11 +1,12 @@
 package com.cmcorg.engine.web.cache.util;
 
+import cn.hutool.cache.Cache;
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.func.Func0;
 import cn.hutool.core.map.MapUtil;
 import com.cmcorg.engine.web.model.model.constant.BaseConstant;
 import com.cmcorg.engine.web.model.model.constant.LogTopicConstant;
 import com.cmcorg.engine.web.redisson.enums.RedisKeyEnum;
-import com.github.benmanes.caffeine.cache.Cache;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.redisson.api.RBatch;
@@ -55,7 +56,7 @@ public class MyCacheUtil {
     }
 
     @NotNull
-    private static <T> T checkAndSetResultToDefault(T result, T defaultResult) {
+    private static <T> T checkAndReturnResult(T result, T defaultResult) {
         if (defaultResult == null) {
             throw new RuntimeException("操作失败：defaultResult == null"); // 不能为 null，目的：防止缓存不写入数据
         }
@@ -73,35 +74,28 @@ public class MyCacheUtil {
      * 获取：一般类型的缓存
      */
     @NotNull
-    public static <T> T getCache(RedisKeyEnum redisKeyEnum, T defaultResult, @NotNull Supplier<T> supplier) {
+    public static <T> T getCache(RedisKeyEnum redisKeyEnum, T defaultResult, @NotNull Func0<T> supplier) {
 
-        T result = (T)cache.getIfPresent(redisKeyEnum);
+        Object result = cache.get(redisKeyEnum, () -> {
 
-        if (result != null) {
-            log.info("{}：返回 本地缓存", redisKeyEnum.name());
-            return result;
-        }
+            log.info("{}：读取 redis缓存", redisKeyEnum.name());
+            T value = redissonClient.<T>getBucket(redisKeyEnum.name()).get();
+            if (value != null) {
+                return value; // 返回 redis缓存
+            }
 
-        result = (T)redissonClient.getBucket(redisKeyEnum.name()).get();
-
-        if (result == null) {
             log.info("{}：读取数据库数据", redisKeyEnum.name());
-            result = supplier.get();
-        } else {
-            log.info("{}：加入 本地缓存，并返回 redis缓存", redisKeyEnum.name());
-            cache.put(redisKeyEnum, result);
-            return result;
-        }
+            value = supplier.call();
 
-        result = checkAndSetResultToDefault(result, defaultResult);// 检查并设置为默认值
+            value = checkAndReturnResult(value, defaultResult); // 检查并返回值，目的：防止缓存不写入数据
 
-        log.info("{}：加入 redis缓存", redisKeyEnum.name());
-        redissonClient.getBucket(redisKeyEnum.name()).setAsync(result); // 优先保证 redis里面成功写入
+            log.info("{}：加入到 redis缓存中", redisKeyEnum.name());
+            redissonClient.<T>getBucket(redisKeyEnum.name()).set(value);
 
-        log.info("{}：加入 本地缓存", redisKeyEnum.name());
-        cache.put(redisKeyEnum, result);
+            return value; // 会自动设置到本地缓存中
+        });
 
-        return result;
+        return (T)result;
     }
 
     /**
@@ -111,7 +105,7 @@ public class MyCacheUtil {
     public static <T extends Map<?, ?>> T getMapCache(RedisKeyEnum redisKeyEnum, T defaultResultMap,
         @NotNull Supplier<T> supplier) {
 
-        T resultMap = (T)cache.getIfPresent(redisKeyEnum);
+        T resultMap = (T)cache.get(redisKeyEnum);
 
         if (CollUtil.isNotEmpty(resultMap)) {
             log.info("{}：返回 本地缓存", redisKeyEnum.name());
@@ -130,7 +124,7 @@ public class MyCacheUtil {
         log.info("{}：读取数据库数据", redisKeyEnum.name());
         resultMap = supplier.get();
 
-        resultMap = checkAndSetResultToDefault(resultMap, defaultResultMap); // 检查并设置为默认值
+        resultMap = checkAndReturnResult(resultMap, defaultResultMap); // 检查并设置为默认值
 
         log.info("{}：加入 redis缓存", redisKeyEnum.name());
         RBatch batch = redissonClient.createBatch(); // 优先保证 redis里面成功写入
@@ -151,7 +145,7 @@ public class MyCacheUtil {
     public static <T extends List<?>> T getListCache(RedisKeyEnum redisKeyEnum, T defaultResultList,
         @NotNull Supplier<T> supplier) {
 
-        T resultList = (T)cache.getIfPresent(redisKeyEnum);
+        T resultList = (T)cache.get(redisKeyEnum);
 
         if (CollUtil.isNotEmpty(resultList)) {
             log.info("{}：返回 本地缓存", redisKeyEnum.name());
@@ -169,7 +163,7 @@ public class MyCacheUtil {
         log.info("{}：读取数据库数据", redisKeyEnum.name());
         resultList = supplier.get();
 
-        resultList = checkAndSetResultToDefault(resultList, defaultResultList); // 检查并设置为默认值
+        resultList = checkAndReturnResult(resultList, defaultResultList); // 检查并设置为默认值
 
         log.info("{}：加入 redis缓存", redisKeyEnum.name());
         RBatch batch = redissonClient.createBatch(); // 优先保证 redis里面成功写入
