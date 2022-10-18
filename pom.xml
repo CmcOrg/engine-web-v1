@@ -203,7 +203,7 @@
             <dependency>
                 <groupId>com.github.oshi</groupId>
                 <artifactId>oshi-core</artifactId>
-                <version>6.2.2</version>
+                <version>6.3.0</version>
             </dependency>
 
             <!-- xxl-job -->
@@ -238,7 +238,7 @@
             <dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson-spring-boot-starter</artifactId>
-                <version>3.17.6</version>
+                <version>3.17.7</version>
             </dependency>
 
             <!-- 离线IP地址定位库 -->
@@ -259,14 +259,14 @@
             <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-ui</artifactId>
-                <version>1.6.11</version>
+                <version>1.6.12</version>
             </dependency>
 
             <!-- hutool -->
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
-                <version>5.8.7</version>
+                <version>5.8.8</version>
             </dependency>
 
             <!-- mybatis-plus -->
