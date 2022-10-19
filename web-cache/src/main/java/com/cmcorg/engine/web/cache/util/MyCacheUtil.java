@@ -75,7 +75,7 @@ public class MyCacheUtil {
      */
     @SneakyThrows
     @NotNull
-    public static <T> T getCache(RedisKeyEnum redisKeyEnum, T defaultResult, @NotNull Func0<T> supplier) {
+    public static <T> T getCache(RedisKeyEnum redisKeyEnum, T defaultResult, @NotNull Func0<T> func0) {
 
         T result = (T)cache.get(redisKeyEnum);
 
@@ -88,7 +88,7 @@ public class MyCacheUtil {
 
         if (result == null) {
             log.info("{}：读取数据库数据", redisKeyEnum.name());
-            result = supplier.call();
+            result = func0.call();
         } else {
             log.info("{}：加入 本地缓存，并返回 redis缓存", redisKeyEnum.name());
             cache.put(redisKeyEnum, result);
@@ -112,7 +112,7 @@ public class MyCacheUtil {
     @SneakyThrows
     @NotNull
     public static <T extends Map<?, ?>> T getMapCache(RedisKeyEnum redisKeyEnum, T defaultResultMap,
-        @NotNull Func0<T> supplier) {
+        @NotNull Func0<T> func0) {
 
         T resultMap = (T)cache.get(redisKeyEnum);
 
@@ -131,7 +131,7 @@ public class MyCacheUtil {
         }
 
         log.info("{}：读取数据库数据", redisKeyEnum.name());
-        resultMap = supplier.call();
+        resultMap = func0.call();
 
         resultMap = checkAndReturnResult(resultMap, defaultResultMap); // 检查并设置为默认值
 
@@ -153,7 +153,7 @@ public class MyCacheUtil {
     @SneakyThrows
     @NotNull
     public static <T extends List<?>> T getListCache(RedisKeyEnum redisKeyEnum, T defaultResultList,
-        @NotNull Func0<T> supplier) {
+        @NotNull Func0<T> func0) {
 
         T resultList = (T)cache.get(redisKeyEnum);
 
@@ -171,7 +171,7 @@ public class MyCacheUtil {
         }
 
         log.info("{}：读取数据库数据", redisKeyEnum.name());
-        resultList = supplier.call();
+        resultList = func0.call();
 
         resultList = checkAndReturnResult(resultList, defaultResultList); // 检查并设置为默认值
 

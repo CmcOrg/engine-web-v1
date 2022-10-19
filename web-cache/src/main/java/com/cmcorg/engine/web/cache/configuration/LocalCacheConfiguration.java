@@ -13,7 +13,7 @@ public class LocalCacheConfiguration {
 
     @Bean
     public Cache<RedisKeyEnum, Object> cache() {
-        return CacheUtil.newLRUCache(512);
+        return CacheUtil.newLRUCache(5120);
     }
 
 }
