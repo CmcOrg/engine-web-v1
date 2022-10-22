@@ -37,4 +37,7 @@ public class SysUserDO extends BaseEntity {
     @Schema(description = "手机号，可以为空")
     private String phone;
 
+    @Schema(description = "租户主键 id")
+    private Long tenantId;
+
 }
