@@ -112,17 +112,16 @@ public abstract class AbstractNettyServerHandler extends ChannelInboundHandlerAd
                 handlerSecurityMessage(msg, ctx.channel(), aLong -> {
                     // 身份认证成功，之后的处理
                     RedissonUtil.doLock(RedisKeyEnum.PRE_SOCKET_AUTH_USER_ID.name() + aLong, () -> {
-                        ctx.channel().attr(USER_ID_KEY).set(aLong);
-                        NOT_SECURITY_CHANNEL_MAP.remove(ctx.channel().id().asLongText());
                         Channel channel = USER_ID_CHANNEL_MAP.get(aLong);
                         if (channel != null) {
-                            channel.close(); // 移除之前的通道
+                            channel.close(); // 移除之前的通道，备注：这里是异步的
                         }
+                        ctx.channel().attr(USER_ID_KEY).set(aLong);
                         USER_ID_CHANNEL_MAP.put(aLong, ctx.channel());
+                        NOT_SECURITY_CHANNEL_MAP.remove(ctx.channel().id().asLongText());
                         log.info("处理身份认证的消息成功，用户 id：{}，通道 id：{}，当前没有进行身份认证的通道总数：{}，当前进行了身份认证的通道总数：{}",
                             ctx.channel().attr(USER_ID_KEY).get(), ctx.channel().id().asLongText(),
                             NOT_SECURITY_CHANNEL_MAP.size(), USER_ID_CHANNEL_MAP.size());
-
                         return null;
                     });
                 });
