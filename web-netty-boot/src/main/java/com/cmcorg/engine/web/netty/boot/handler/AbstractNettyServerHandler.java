@@ -108,6 +108,10 @@ public abstract class AbstractNettyServerHandler extends ChannelInboundHandlerAd
                     // 身份认证成功，之后的处理
                     ctx.channel().attr(USER_ID_KEY).set(aLong);
                     NOT_SECURITY_CHANNEL_MAP.remove(ctx.channel().id().asLongText());
+                    Channel channel = USER_ID_CHANNEL_MAP.get(aLong);
+                    if (channel != null) {
+                        channel.closeFuture(); // 移除之前的通道
+                    }
                     USER_ID_CHANNEL_MAP.put(aLong, ctx.channel());
                     log.info("处理身份认证的消息成功，用户 id：{}，通道 id：{}，当前没有进行身份认证的通道总数：{}，当前进行了身份认证的通道总数：{}",
                         ctx.channel().attr(USER_ID_KEY).get(), ctx.channel().id().asLongText(),
