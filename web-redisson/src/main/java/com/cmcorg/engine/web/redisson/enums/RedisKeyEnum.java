@@ -9,7 +9,9 @@ package com.cmcorg.engine.web.redisson.enums;
 public enum RedisKeyEnum {
 
     // 【PRE_】开头 ↓
-    PRE_ROOM_CONFIG_ID, // 房间配置主键 id锁，锁 主键 id
+    PRE_SOCKET_AUTH_USER_ID, // socket 认证时的 userId锁，锁【userId】
+
+    PRE_ROOM_CONFIG_ID, // 房间配置主键 id锁，锁【主键 id】
 
     PRE_IP_BLACK, // ip黑名单前端，后面跟 ip
     PRE_IP_TOTAL_CHECK, // ip 请求总数，key前缀，后面跟 ip
