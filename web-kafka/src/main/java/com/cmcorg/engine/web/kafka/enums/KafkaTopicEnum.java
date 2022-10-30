@@ -3,11 +3,13 @@ package com.cmcorg.engine.web.kafka.enums;
 import cn.hutool.core.lang.TypeReference;
 import com.cmcorg.engine.web.util.util.TypeReferenceUtil;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  * kafka 主题枚举类
  */
 @AllArgsConstructor
+@Getter
 public enum KafkaTopicEnum {
 
     CANAL_TOPIC(null, null), // canal

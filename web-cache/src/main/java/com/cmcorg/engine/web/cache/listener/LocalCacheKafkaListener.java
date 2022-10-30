@@ -32,7 +32,7 @@ public class LocalCacheKafkaListener {
     public void receive(List<String> recordList, Acknowledgment acknowledgment) {
 
         Set<RedisKeyEnum> redisKeyEnumSet =
-            recordList.stream().map(it -> JSONUtil.toBean(it, TypeReferenceUtil.STRING_SET, true))
+            recordList.stream().map(it -> JSONUtil.toBean(it, TypeReferenceUtil.STRING_SET, false))
                 .flatMap(Collection::stream).distinct().map(CanalKafkaHandlerKeyEnum::getByKey).filter(Objects::nonNull)
                 .map(CanalKafkaHandlerKeyEnum::getDeleteRedisKeyEnumSet).filter(Objects::nonNull)
                 .flatMap(Collection::stream).collect(Collectors.toSet());
