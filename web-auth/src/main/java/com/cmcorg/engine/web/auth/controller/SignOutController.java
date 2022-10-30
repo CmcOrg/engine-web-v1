@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 
 @WebPage(type = PageTypeEnum.NONE)
 @RestController
-@RequestMapping(value = "/signOut")
+@RequestMapping(value = "/sign/out")
 @Tag(name = "退出登录")
 public class SignOutController {
 

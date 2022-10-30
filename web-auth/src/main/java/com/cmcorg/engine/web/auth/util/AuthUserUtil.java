@@ -1,8 +1,9 @@
 package com.cmcorg.engine.web.auth.util;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONObject;
 import com.baomidou.mybatisplus.extension.toolkit.ChainWrappers;
 import com.cmcorg.engine.web.auth.exception.BaseBizCodeEnum;
 import com.cmcorg.engine.web.auth.mapper.*;
@@ -116,7 +117,11 @@ public class AuthUserUtil {
         Long userId = null;
 
         if (SecurityContextHolder.getContext().getAuthentication() != null) {
-            userId = Convert.toLong(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+            Object principalObject = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if (principalObject instanceof Map) {
+                userId = BeanUtil.toBean(principalObject, JSONObject.class)
+                    .get(MyJwtUtil.PAYLOAD_MAP_USER_ID_KEY, MyJwtUtil.PAYLOAD_MAP_USER_ID_CLASS);
+            }
         }
 
         return userId;

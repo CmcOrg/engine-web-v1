@@ -1,6 +1,8 @@
 package com.cmcorg.engine.web.netty.boot.handler;
 
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.json.JSONUtil;
+import com.cmcorg.engine.web.auth.util.MyJwtUtil;
 import com.cmcorg.engine.web.model.model.constant.BaseConstant;
 import com.cmcorg.engine.web.model.model.constant.LogTopicConstant;
 import com.cmcorg.engine.web.redisson.enums.RedisKeyEnum;
@@ -129,8 +131,8 @@ public abstract class AbstractNettyServerHandler extends ChannelInboundHandlerAd
             }
 
             // 把 userId设置到：security的上下文里面
-            SecurityContextHolder.getContext()
-                .setAuthentication(new UsernamePasswordAuthenticationToken(userId, null, null));
+            SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
+                JSONUtil.createObj().set(MyJwtUtil.PAYLOAD_MAP_USER_ID_KEY, userId), null, null));
 
             handlerMessage(msg);// 处理：进行了身份认证的通道的消息
 

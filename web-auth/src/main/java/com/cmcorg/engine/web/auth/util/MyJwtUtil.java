@@ -27,6 +27,7 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 @Component
@@ -37,6 +38,7 @@ public class MyJwtUtil {
         "4282dde8cb54c0c68082ada1b1d9ce048195cd3090e07d1ed3e1871b462a8b75fee46467b96f33dea6511862f1ea4867aed76243dfe7e1efb89638d3da6570d1";
 
     public static final String PAYLOAD_MAP_USER_ID_KEY = "userId";
+    public static final Class<Long> PAYLOAD_MAP_USER_ID_CLASS = Long.class;
 
     private static AuthProperties authProperties;
     private static SysUserMapper sysUserMapper;
@@ -68,16 +70,20 @@ public class MyJwtUtil {
             return null;
         }
 
-        return MyJwtUtil.sign(userId, jwtSecretSuf);
+        return MyJwtUtil.sign(userId, jwtSecretSuf, null);
     }
 
     /**
      * 生成 jwt
      */
     @NotNull
-    private static String sign(Long userId, String jwtSecretSuf) {
+    private static String sign(Long userId, String jwtSecretSuf, Consumer<JSONObject> consumer) {
 
         JSONObject payloadMap = JSONUtil.createObj().set(PAYLOAD_MAP_USER_ID_KEY, userId);
+
+        if (consumer != null) {
+            consumer.accept(payloadMap);
+        }
 
         String jwt = JWT.create() //
             .setExpiresAt(new Date(System.currentTimeMillis() + BaseConstant.JWT_EXPIRE_TIME)) // 设置过期时间

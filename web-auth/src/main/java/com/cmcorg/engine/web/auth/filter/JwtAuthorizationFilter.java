@@ -1,10 +1,12 @@
 package com.cmcorg.engine.web.auth.filter;
 
-import cn.hutool.core.convert.Convert;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.exceptions.ValidateException;
+import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTValidator;
+import com.cmcorg.engine.web.auth.configuration.security.IJwtValidatorConfiguration;
 import com.cmcorg.engine.web.auth.exception.BaseBizCodeEnum;
 import com.cmcorg.engine.web.auth.properties.AuthProperties;
 import com.cmcorg.engine.web.auth.util.MyJwtUtil;
@@ -23,6 +25,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 自定义 jwt过滤器，备注：后续接口方法，无需判断账号是否封禁或者不存在
@@ -31,10 +34,13 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     private static RedissonClient redissonClient;
     private static AuthProperties authProperties;
+    private static List<IJwtValidatorConfiguration> iJwtValidatorConfigurationList;
 
-    public JwtAuthorizationFilter(RedissonClient redissonClient, AuthProperties authProperties) {
+    public JwtAuthorizationFilter(RedissonClient redissonClient, AuthProperties authProperties,
+        List<IJwtValidatorConfiguration> iJwtValidatorConfigurationList) {
         JwtAuthorizationFilter.redissonClient = redissonClient;
         JwtAuthorizationFilter.authProperties = authProperties;
+        JwtAuthorizationFilter.iJwtValidatorConfigurationList = iJwtValidatorConfigurationList;
     }
 
     @SneakyThrows
@@ -70,7 +76,8 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             return null;
         }
 
-        Long userId = Convert.toLong(jwt.getPayload(MyJwtUtil.PAYLOAD_MAP_USER_ID_KEY));
+        Long userId = jwt.getPayload().getClaimsJson()
+            .get(MyJwtUtil.PAYLOAD_MAP_USER_ID_KEY, MyJwtUtil.PAYLOAD_MAP_USER_ID_CLASS);
         if (userId == null) {
             return null;
         }
@@ -110,8 +117,18 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             return loginExpired(response); // 提示登录过期，请重新登录
         }
 
+        // 执行：额外的，检查 jwt的方法
+        if (CollUtil.isNotEmpty(iJwtValidatorConfigurationList)) {
+            for (IJwtValidatorConfiguration item : iJwtValidatorConfigurationList) {
+                boolean validFlag = item.validator(jwt, request.getRequestURI(), response);
+                if (BooleanUtil.isFalse(validFlag)) {
+                    return null;
+                }
+            }
+        }
+
         // 通过 userId 获取用户具有的权限
-        return new UsernamePasswordAuthenticationToken(userId, null,
+        return new UsernamePasswordAuthenticationToken(jwt.getPayload().getClaimsJson(), null,
             MyJwtUtil.getSimpleGrantedAuthorityListByUserId(userId));
     }
 
@@ -119,7 +136,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
      * 提示登录过期，请重新登录
      */
     @Nullable
-    private UsernamePasswordAuthenticationToken loginExpired(HttpServletResponse response) {
+    public static UsernamePasswordAuthenticationToken loginExpired(HttpServletResponse response) {
         ResponseUtil.out(response, BaseBizCodeEnum.LOGIN_EXPIRED);
         return null;
     }
