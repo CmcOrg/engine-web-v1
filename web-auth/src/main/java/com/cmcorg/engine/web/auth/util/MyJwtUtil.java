@@ -52,7 +52,7 @@ public class MyJwtUtil {
      * 统一生成 jwt
      */
     @Nullable
-    public static String generateJwt(Long userId, String jwtSecretSuf) {
+    public static String generateJwt(Long userId, String jwtSecretSuf, Consumer<JSONObject> consumer) {
 
         if (userId == null) {
             return null;
@@ -70,7 +70,7 @@ public class MyJwtUtil {
             return null;
         }
 
-        return MyJwtUtil.sign(userId, jwtSecretSuf, null);
+        return MyJwtUtil.sign(userId, jwtSecretSuf, consumer);
     }
 
     /**
