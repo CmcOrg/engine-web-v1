@@ -41,7 +41,7 @@ public class SecurityConfiguration {
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity,
         @Value("${spring.profiles.active:prod}") String profiles,
         List<IAuthPermitAllConfiguration> iAuthPermitAllConfigurationList, RedissonClient redissonClient,
-        AuthProperties authProperties) {
+        AuthProperties authProperties, List<IJwtValidatorConfiguration> iJwtValidatorConfigurationList) {
 
         boolean prodFlag = "prod".equals(profiles);
 
@@ -64,8 +64,9 @@ public class SecurityConfiguration {
             .permitAll() // 可以匿名访问的请求
             .anyRequest().authenticated(); // 拦截所有请求
 
-        httpSecurity.addFilterBefore(new JwtAuthorizationFilter(redissonClient, authProperties),
-            UsernamePasswordAuthenticationFilter.class);
+        httpSecurity
+            .addFilterBefore(new JwtAuthorizationFilter(redissonClient, authProperties, iJwtValidatorConfigurationList),
+                UsernamePasswordAuthenticationFilter.class);
 
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // 不需要session
 
