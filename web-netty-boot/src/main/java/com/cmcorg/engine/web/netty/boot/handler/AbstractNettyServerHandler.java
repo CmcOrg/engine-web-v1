@@ -1,10 +1,13 @@
 package com.cmcorg.engine.web.netty.boot.handler;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.cmcorg.engine.web.auth.util.MyJwtUtil;
 import com.cmcorg.engine.web.model.model.constant.BaseConstant;
 import com.cmcorg.engine.web.model.model.constant.LogTopicConstant;
+import com.cmcorg.engine.web.netty.boot.configuration.INettyPrincipalJsonConfiguration;
 import com.cmcorg.engine.web.redisson.enums.RedisKeyEnum;
 import com.cmcorg.engine.web.redisson.util.RedissonUtil;
 import io.netty.channel.Channel;
@@ -19,6 +22,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -26,6 +31,9 @@ import java.util.function.Consumer;
 @ChannelHandler.Sharable
 @Slf4j(topic = LogTopicConstant.NETTY)
 public abstract class AbstractNettyServerHandler extends ChannelInboundHandlerAdapter {
+
+    @Resource
+    List<INettyPrincipalJsonConfiguration> iNettyPrincipalJsonConfigurationList;
 
     // 没有进行身份认证的通道，一般这种通道，业务可以忽略，备注：一定时间内，会关闭此类型通道
     private static final Map<String, Channel> NOT_SECURITY_CHANNEL_MAP = MapUtil.newConcurrentHashMap();
@@ -130,9 +138,18 @@ public abstract class AbstractNettyServerHandler extends ChannelInboundHandlerAd
                 return;
             }
 
-            // 把 userId设置到：security的上下文里面
-            SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
-                JSONUtil.createObj().set(MyJwtUtil.PAYLOAD_MAP_USER_ID_KEY, userId), null, null));
+            JSONObject principalJson = JSONUtil.createObj().set(MyJwtUtil.PAYLOAD_MAP_USER_ID_KEY, userId);
+
+            // 添加：额外的属性
+            if (CollUtil.isNotEmpty(iNettyPrincipalJsonConfigurationList)) {
+                for (INettyPrincipalJsonConfiguration item : iNettyPrincipalJsonConfigurationList) {
+                    item.handler(principalJson);
+                }
+            }
+
+            // 把 principalJson设置到：security的上下文里面
+            SecurityContextHolder.getContext()
+                .setAuthentication(new UsernamePasswordAuthenticationToken(principalJson, null, null));
 
             handlerMessage(msg);// 处理：进行了身份认证的通道的消息
 
