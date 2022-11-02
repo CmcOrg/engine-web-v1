@@ -113,18 +113,26 @@ public class AuthUserUtil {
      */
     @Nullable
     private static Long getCurrentUserIdWillNull() {
+        return getSecurityContextHolderContextAuthenticationPrincipalJsonObjectValueByKey(
+            MyJwtUtil.PAYLOAD_MAP_USER_ID_KEY);
+    }
 
-        Long userId = null;
+    /**
+     * 获取：当前 security上下文里面存储的用户信息，通过：key
+     */
+    public static <T> T getSecurityContextHolderContextAuthenticationPrincipalJsonObjectValueByKey(String key) {
+
+        T result = null;
 
         if (SecurityContextHolder.getContext().getAuthentication() != null) {
             Object principalObject = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             if (principalObject instanceof Map) {
-                userId = BeanUtil.toBean(principalObject, JSONObject.class)
-                    .get(MyJwtUtil.PAYLOAD_MAP_USER_ID_KEY, MyJwtUtil.PAYLOAD_MAP_USER_ID_CLASS);
+                result = (T)BeanUtil.toBean(principalObject, JSONObject.class).get(key);
             }
         }
 
-        return userId;
+        return result;
+
     }
 
     /**
