@@ -120,6 +120,7 @@ public class AuthUserUtil {
     /**
      * 获取：当前 security上下文里面存储的用户信息，通过：key
      */
+    @Nullable
     public static <T> T getSecurityContextHolderContextAuthenticationPrincipalJsonObjectValueByKey(String key) {
 
         T result = null;
