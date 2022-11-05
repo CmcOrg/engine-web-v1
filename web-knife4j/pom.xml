@@ -20,7 +20,7 @@
             <artifactId>web-model</artifactId>
         </dependency>
 
-        <!-- web-knife4j -->
+        <!-- knife4j -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-springdoc-ui</artifactId>
