@@ -15,7 +15,7 @@ public class MyEntityUtil {
      * 获取不为 null对象，并且去掉前后空格的 字符串
      */
     @NotNull
-    public static String getNotNullAdnTrimStr(String str) {
+    public static String getNotNullAndTrimStr(String str) {
         return getNotNullStr(StrUtil.trim(str), "");
     }
 
@@ -36,11 +36,11 @@ public class MyEntityUtil {
     }
 
     /**
-     * 获取不为 null对象的 ParentId字符串
+     * 获取不为 null对象的 parentId字符串
      */
     @NotNull
     public static Long getNotNullParentId(Long aLong) {
-        return aLong == null ? 0L : aLong;
+        return getNotNullLong(aLong, 0L);
     }
 
     /**
@@ -57,15 +57,15 @@ public class MyEntityUtil {
      */
     @NotNull
     public static BigDecimal getNotNullBigDecimal(BigDecimal bigDecimal) {
-        return bigDecimal == null ? BigDecimal.ZERO : bigDecimal;
+        return getNotNullBigDecimal(bigDecimal, BigDecimal.ZERO);
     }
 
     /**
-     * 获取不为 null对象的 Integer
+     * 获取不为 null对象的 BigDecimal，如果为空，则返回默认值
      */
     @NotNull
-    public static Integer getNotNullInt(Integer integer) {
-        return integer == null ? -1 : integer;
+    public static BigDecimal getNotNullBigDecimal(BigDecimal bigDecimal, BigDecimal defaultBigDecimal) {
+        return bigDecimal == null ? defaultBigDecimal : bigDecimal;
     }
 
     /**
@@ -73,7 +73,23 @@ public class MyEntityUtil {
      */
     @NotNull
     public static Integer getNotNullOrderNo(Integer integer) {
-        return integer == null ? 0 : integer;
+        return getNotNullInt(integer, 0);
+    }
+
+    /**
+     * 获取不为 null对象的 Integer
+     */
+    @NotNull
+    public static Integer getNotNullInt(Integer integer) {
+        return getNotNullInt(integer, -1);
+    }
+
+    /**
+     * 获取不为 null对象的 Integer，如果为空，则返回默认值
+     */
+    @NotNull
+    public static Integer getNotNullInt(Integer integer, Integer defaultInt) {
+        return integer == null ? defaultInt : integer;
     }
 
     /**
@@ -81,14 +97,22 @@ public class MyEntityUtil {
      */
     @NotNull
     public static Long getNotNullLong(Long aLong) {
-        return aLong == null ? -1L : aLong;
+        return getNotNullLong(aLong, -1L);
+    }
+
+    /**
+     * 获取不为 null对象的 Long，如果为空，则返回默认值
+     */
+    @NotNull
+    public static Long getNotNullLong(Long aLong, Long defaultLong) {
+        return aLong == null ? defaultLong : aLong;
     }
 
     /**
      * number为 -1的，设置为 null
      */
     @Nullable
-    public static <T> T removeDefault(T t) {
+    public static <T> T removeNumberDefault(T t) {
         if (t == null) {
             return null;
         }
