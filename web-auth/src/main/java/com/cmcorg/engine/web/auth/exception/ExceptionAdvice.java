@@ -2,6 +2,7 @@ package com.cmcorg.engine.web.auth.exception;
 
 import cn.hutool.core.map.MapUtil;
 import com.cmcorg.engine.web.auth.model.vo.ApiResultVO;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -41,6 +42,21 @@ public class ExceptionAdvice {
      */
     @ExceptionHandler(value = IllegalArgumentException.class)
     public ApiResultVO<?> handlerIllegalArgumentException(IllegalArgumentException e) {
+
+        try {
+            ApiResultVO.error(BaseBizCodeEnum.PARAMETER_CHECK_ERROR, e.getMessage()); // 这里肯定会抛出 BaseException异常
+        } catch (BaseException baseException) {
+            return getBaseExceptionApiResult(baseException);
+        }
+
+        return null; // 这里不会执行，只是为了通过语法检查
+    }
+
+    /**
+     * 参数校验异常-3
+     */
+    @ExceptionHandler(value = HttpMessageNotReadableException.class)
+    public ApiResultVO<?> handlerHttpMessageNotReadableException(HttpMessageNotReadableException e) {
 
         try {
             ApiResultVO.error(BaseBizCodeEnum.PARAMETER_CHECK_ERROR, e.getMessage()); // 这里肯定会抛出 BaseException异常
