@@ -19,6 +19,10 @@ public interface BaseRegexConstant {
 
     String SIGN_IN_NAME_REGEXP = NICK_NAME_REGEXP; // 登录名限制：只能包含中文，数字，字母，下划线，横杠，长度2-20
 
-    String PHONE = "^(13[0-9]|14[5|7]|15[0|1|2|3|4|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$"; // 手机号码
+    String PHONE = "^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\\d{8}$"; // 手机号码
+
+    String CHINESE_STR = "^[\\u4e00-\\u9fa5]{0,}$"; // 中文
+
+    String ID_NUMBER = "(^\\d{15}$)|(^\\d{18}$)|(^\\d{17}(\\d|X|x)$)"; // 身份证号
 
 }
