@@ -39,10 +39,18 @@
         <module>web-netty-boot</module>
         <module>web-ip2region</module>
         <module>web-wx</module>
+        <module>web-tencent</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+
+            <!-- web-tencent -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>web-tencent</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- web-wx -->
             <dependency>
@@ -225,7 +233,7 @@
             <dependency>
                 <groupId>com.tencentcloudapi</groupId>
                 <artifactId>tencentcloud-sdk-java</artifactId>
-                <version>3.1.623</version>
+                <version>3.1.633</version>
             </dependency>
 
             <!-- 支付宝，获取最新版本号：https://github.com/alipay/alipay-sdk-java-all -->

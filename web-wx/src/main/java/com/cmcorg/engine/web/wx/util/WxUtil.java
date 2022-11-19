@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.cmcorg.engine.web.auth.model.vo.ApiResultVO;
 import com.cmcorg.engine.web.redisson.enums.RedisKeyEnum;
 import com.cmcorg.engine.web.wx.model.vo.WxAccessTokenVO;
 import com.cmcorg.engine.web.wx.model.vo.WxBaseVO;
@@ -86,10 +87,7 @@ public class WxUtil {
     private static void checkWxVO(WxBaseVO wxBaseVO, String msg) {
 
         if (wxBaseVO.getErrcode() != null && wxBaseVO.getErrcode() != 0) {
-
-            throw new RuntimeException(
-                "微信：获取【" + msg + "】失败，errcode：【" + wxBaseVO.getErrcode() + "】，errmsg：【" + wxBaseVO.getErrmsg() + "】");
-
+            ApiResultVO.error("微信：获取【{}】失败，errcode：【{}】，errmsg：【{}】", msg, wxBaseVO.getErrcode(), wxBaseVO.getErrmsg());
         }
 
     }
