@@ -1,13 +1,11 @@
 package com.cmcorg.engine.web.log.configuration;
 
 import com.cmcorg.engine.web.log.properties.LogProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
 @Component
-@EnableConfigurationProperties(LogProperties.class)
 public class LogConfiguration {
 
     @Resource

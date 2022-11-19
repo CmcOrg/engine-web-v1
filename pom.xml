@@ -38,10 +38,18 @@
         <module>web-model-generate</module>
         <module>web-netty-boot</module>
         <module>web-ip2region</module>
+        <module>web-wx</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+
+            <!-- web-wx -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>web-wx</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- web-ip2region -->
             <dependency>

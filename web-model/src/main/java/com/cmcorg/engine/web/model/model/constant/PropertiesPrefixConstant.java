@@ -12,4 +12,6 @@ public interface PropertiesPrefixConstant {
 
     String SYS_CACHE = PRE_SYS + "cache"; // 缓存相关
 
+    String WX = PRE_SYS + "wx"; // 微信相关
+
 }
