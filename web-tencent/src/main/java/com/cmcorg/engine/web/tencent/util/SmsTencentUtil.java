@@ -1,7 +1,6 @@
 package com.cmcorg.engine.web.tencent.util;
 
 import com.cmcorg.engine.web.auth.model.vo.ApiResultVO;
-import com.cmcorg.engine.web.auth.util.CodeUtil;
 import com.cmcorg.engine.web.tencent.properties.TencentProperties;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.sms.v20210111.SmsClient;
@@ -24,67 +23,62 @@ public class SmsTencentUtil {
     }
 
     /**
+     * 发送：账号注销
+     */
+    public static void sendDelete(String phoneNumber, String code) {
+
+        String[] templateParamSet = {code, "10"};
+        doSend("1391013", templateParamSet, phoneNumber);
+
+    }
+
+    /**
      * 发送：绑定手机
      */
-    public static String sendBind(String phoneNumber) {
+    public static void sendBind(String phoneNumber, String code) {
 
-        String code = CodeUtil.getCode();
         String[] templateParamSet = {code, "10"};
         doSend("1389707", templateParamSet, phoneNumber);
-
-        return code;
 
     }
 
     /**
      * 发送：修改手机
      */
-    public static String sendUpdate(String phoneNumber) {
+    public static void sendUpdate(String phoneNumber, String code) {
 
-        String code = CodeUtil.getCode();
         String[] templateParamSet = {code, "10"};
         doSend("1389628", templateParamSet, phoneNumber);
-
-        return code;
 
     }
 
     /**
-     * 发送：忘记密码
+     * 发送：密码重置
      */
-    public static String sendForgotPassword(String phoneNumber) {
+    public static void sendResetPassword(String phoneNumber, String code) {
 
-        String code = CodeUtil.getCode();
         String[] templateParamSet = {code};
         doSend("1381647", templateParamSet, phoneNumber);
-
-        return code;
 
     }
 
     /**
      * 发送：登录短信
      */
-    public static String sendSignIn(String phoneNumber) {
+    public static void sendSignIn(String phoneNumber, String code) {
 
-        String code = CodeUtil.getCode();
         String[] templateParamSet = {code, "10"};
         doSend("1381644", templateParamSet, phoneNumber);
-
-        return code;
 
     }
 
     /**
      * 发送：注册短信
      */
-    public static String sendSignUp(String phoneNumber) {
+    public static void sendSignUp(String phoneNumber, String code) {
 
-        String code = CodeUtil.getCode();
         String[] templateParamSet = {code, "10"};
         doSend("1380202", templateParamSet, phoneNumber);
-
-        return code;
 
     }
 

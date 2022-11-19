@@ -59,7 +59,7 @@ public class AuthUserUtil {
     }
 
     /**
-     * 获取当前用户的 邮箱，如果是 admin账号，则会报错，只会当前用户的 邮箱，不会返回 null
+     * 获取当前用户的 邮箱，如果是 admin账号，则会报错，只会返回当前用户的 邮箱，不会返回 null
      */
     @NotNull
     public static String getCurrentUserEmailNotAdmin() {
@@ -70,6 +70,24 @@ public class AuthUserUtil {
             .select(SysUserDO::getEmail).one();
 
         if (sysUserDO == null || StrUtil.isBlank(sysUserDO.getEmail())) {
+            ApiResultVO.error(BaseBizCodeEnum.UNABLE_TO_SEND_VERIFICATION_CODE_BECAUSE_THE_EMAIL_ADDRESS_IS_NOT_BOUND);
+        }
+
+        return sysUserDO.getEmail();
+    }
+
+    /**
+     * 获取当前用户的 手机号码，如果是 admin账号，则会报错，只会返回当前用户的 手机号码，不会返回 null
+     */
+    @NotNull
+    public static String getCurrentUserPhoneNotAdmin() {
+
+        Long currentUserIdNotAdmin = getCurrentUserIdNotAdmin();
+
+        SysUserDO sysUserDO = ChainWrappers.lambdaQueryChain(sysUserMapper).eq(BaseEntity::getId, currentUserIdNotAdmin)
+            .select(SysUserDO::getPhone).one();
+
+        if (sysUserDO == null || StrUtil.isBlank(sysUserDO.getPhone())) {
             ApiResultVO.error(BaseBizCodeEnum.UNABLE_TO_SEND_VERIFICATION_CODE_BECAUSE_THE_EMAIL_ADDRESS_IS_NOT_BOUND);
         }
 

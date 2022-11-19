@@ -18,6 +18,7 @@ public enum RedisKeyEnum {
 
     PRE_JWT_HASH, // jwtHash 前缀
 
+    PRE_PHONE, // 手机号码：锁【手机号码】
     PRE_EMAIL, // 邮箱：锁【邮箱】
     PRE_SIGN_IN_NAME, // 登录名：锁【登录名】
 
