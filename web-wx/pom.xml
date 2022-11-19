@@ -17,7 +17,7 @@
         <!-- web-log -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>web-log</artifactId>
+            <artifactId>web-auth-nacos</artifactId>
         </dependency>
 
         <!-- web-redisson -->

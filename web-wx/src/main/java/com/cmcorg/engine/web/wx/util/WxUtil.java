@@ -9,6 +9,7 @@ import com.cmcorg.engine.web.wx.model.vo.WxAccessTokenVO;
 import com.cmcorg.engine.web.wx.model.vo.WxBaseVO;
 import com.cmcorg.engine.web.wx.model.vo.WxGetPhoneByCodeVO;
 import com.cmcorg.engine.web.wx.properties.WxProperties;
+import org.jetbrains.annotations.NotNull;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
@@ -29,7 +30,8 @@ public class WxUtil {
     /**
      * code换取用户手机号，每个code只能使用一次，code的有效期为5min
      */
-    public static String getPhoneByCode(String code) {
+    @NotNull
+    public static WxGetPhoneByCodeVO.WxPhoneInfoVO getWxPhoneInfoVOByCode(String code) {
 
         String accessToken = getAccessToken();
 
@@ -43,13 +45,14 @@ public class WxUtil {
 
         checkWxVO(wxGetPhoneByCodeVO, "用户手机号"); // 检查：微信回调 vo对象
 
-        return wxGetPhoneByCodeVO.getPhone_info().getPhoneNumber();
+        return wxGetPhoneByCodeVO.getPhone_info();
 
     }
 
     /**
      * 获取：微信小程序全局唯一后台接口调用凭据
      */
+    @NotNull
     private static String getAccessToken() {
 
         RBucket<String> bucket = redissonClient.getBucket(RedisKeyEnum.WX_ACCESS_TOKEN_CACHE.name());
