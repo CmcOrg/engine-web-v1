@@ -35,9 +35,9 @@ public class RedissonUtil {
     /**
      * 获取连锁，并执行方法
      */
-    public static <T> T doMultiLock(String preName, Set<?> nameSet, Supplier<T> supplier, RLock... locks) {
+    public static <T> T doMultiLock(String preName, Set<?> nameSet, Supplier<T> supplier, RLock... lockArr) {
 
-        RLock lock = getMultiLock(preName, nameSet, locks);
+        RLock lock = getMultiLock(preName, nameSet, lockArr);
         lock.lock();
         try {
             return supplier.get();
@@ -49,17 +49,17 @@ public class RedissonUtil {
     /**
      * 获取连锁
      */
-    private static RLock getMultiLock(String preName, Set<?> nameSet, RLock... locks) {
+    private static RLock getMultiLock(String preName, Set<?> nameSet, RLock... tempLockArr) {
 
         if (preName == null) {
             preName = ""; // 防止：null 变成 "null"
         }
 
         RLock[] lockArr;
-        if (locks == null) {
+        if (tempLockArr == null) {
             lockArr = new RLock[nameSet.size()];
         } else {
-            lockArr = new RLock[nameSet.size() + locks.length];
+            lockArr = new RLock[nameSet.size() + tempLockArr.length];
         }
 
         int i = 0;
@@ -68,8 +68,8 @@ public class RedissonUtil {
             i++;
         }
 
-        if (locks != null) {
-            for (RLock item : locks) {
+        if (tempLockArr != null) {
+            for (RLock item : tempLockArr) {
                 lockArr[i] = item;
                 i++;
             }
