@@ -65,7 +65,7 @@ public class SmsTencentUtil {
     /**
      * 发送：登录短信
      */
-    public static String sendLogin(String phoneNumber) {
+    public static String sendSignIn(String phoneNumber) {
 
         String code = CodeUtil.getCode();
         String[] templateParamSet = {code, "10"};
@@ -78,7 +78,7 @@ public class SmsTencentUtil {
     /**
      * 发送：注册短信
      */
-    public static String sendRegister(String phoneNumber) {
+    public static String sendSignUp(String phoneNumber) {
 
         String code = CodeUtil.getCode();
         String[] templateParamSet = {code, "10"};
