@@ -166,7 +166,7 @@ public class SmsTencentUtil {
         String code = sendStatus.getCode();
 
         if (!"Ok".equals(code)) {
-            throw new RuntimeException(StrUtil.format("短信发送失败，code：【{}】，message：【{}】", code, sendStatus.getMessage());
+            throw new RuntimeException(StrUtil.format("短信发送失败，code：【{}】，message：【{}】", code, sendStatus.getMessage()));
         }
 
     }
