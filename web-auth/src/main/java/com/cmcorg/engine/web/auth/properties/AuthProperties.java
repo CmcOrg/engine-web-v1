@@ -17,7 +17,7 @@ public class AuthProperties {
     private String jwtSecretPre =
         "202e5c4e94c60b8e96cc6c8c2471309c11a39ef996dd5ab3b180ba9a0ddcefe99123edeff516e1d3d264f8dde85eaf6ace1ea236d826fda32080d00f64b47ad0111";
 
-    @Schema(description = "是否允许 admin登录")
+    @Schema(description = "是否允许：admin登录")
     private Boolean adminEnable;
 
     @Schema(description = "admin 的昵称")
@@ -26,7 +26,16 @@ public class AuthProperties {
     @Schema(description = "admin 的密码，默认为 suancai，下面是 suancai经过 sha加密之后的字符串，加密次数和方法和前端需进行统一，输入 suancai即可登录")
     private String adminPassword = "89750f4648ab240704529a1504ac8bbb4c85abd9b88522cef992eee8eb2304b2";
 
-    @Schema(description = "是否启用 ipFilter，默认启用")
+    @Schema(description = "是否启用：ipFilter，默认启用")
     private Boolean ipFilterEnable;
+
+    @Schema(description = "是否启用：用户名注册功能，默认启用")
+    private Boolean signInNameSignUpEnable;
+
+    @Schema(description = "是否启用：邮箱注册功能，默认启用")
+    private Boolean emailSignUpEnable;
+
+    @Schema(description = "是否启用：手机号码注册功能，默认启用")
+    private Boolean phoneSignUpEnable;
 
 }
