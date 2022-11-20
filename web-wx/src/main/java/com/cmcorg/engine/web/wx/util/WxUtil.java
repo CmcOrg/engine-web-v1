@@ -7,6 +7,7 @@ import cn.hutool.json.JSONUtil;
 import com.cmcorg.engine.web.redisson.enums.RedisKeyEnum;
 import com.cmcorg.engine.web.wx.model.vo.WxAccessTokenVO;
 import com.cmcorg.engine.web.wx.model.vo.WxBaseVO;
+import com.cmcorg.engine.web.wx.model.vo.WxGetOpenIdVO;
 import com.cmcorg.engine.web.wx.model.vo.WxGetPhoneByCodeVO;
 import com.cmcorg.engine.web.wx.properties.WxProperties;
 import org.jetbrains.annotations.NotNull;
@@ -47,6 +48,22 @@ public class WxUtil {
 
         return wxGetPhoneByCodeVO.getPhone_info();
 
+    }
+
+    /**
+     * 通过微信的 code，获取微信的 openId
+     */
+    public static String getOpenId(String code) {
+
+        String jsonStr = HttpUtil.get(
+            "https://api.weixin.qq.com/sns/jscode2session?appid=" + wxProperties.getAppId() + "&secret=" + wxProperties
+                .getSecret() + "&js_code=" + code + "&grant_type=authorization_code");
+
+        WxGetOpenIdVO wxGetOpenIdVO = JSONUtil.toBean(jsonStr, WxGetOpenIdVO.class);
+
+        checkWxVO(wxGetOpenIdVO, "openId"); // 检查：微信回调 vo对象
+
+        return wxGetOpenIdVO.getOpenid();
     }
 
     /**
