@@ -7,8 +7,8 @@ import cn.hutool.json.JSONUtil;
 import com.cmcorg.engine.web.redisson.enums.RedisKeyEnum;
 import com.cmcorg.engine.web.wx.model.vo.WxAccessTokenVO;
 import com.cmcorg.engine.web.wx.model.vo.WxBaseVO;
-import com.cmcorg.engine.web.wx.model.vo.WxGetOpenIdVO;
-import com.cmcorg.engine.web.wx.model.vo.WxGetPhoneByCodeVO;
+import com.cmcorg.engine.web.wx.model.vo.WxOpenIdVO;
+import com.cmcorg.engine.web.wx.model.vo.WxPhoneByCodeVO;
 import com.cmcorg.engine.web.wx.properties.WxProperties;
 import org.jetbrains.annotations.NotNull;
 import org.redisson.api.RBucket;
@@ -29,10 +29,27 @@ public class WxUtil {
     }
 
     /**
-     * code换取用户手机号，每个code只能使用一次，code的有效期为5min
+     * 通过微信的 code，获取微信的 openId信息
      */
     @NotNull
-    public static WxGetPhoneByCodeVO.WxPhoneInfoVO getWxPhoneInfoVOByCode(String code) {
+    public static WxOpenIdVO getOpenIdByCode(String code) {
+
+        String jsonStr = HttpUtil.get(
+            "https://api.weixin.qq.com/sns/jscode2session?appid=" + wxProperties.getAppId() + "&secret=" + wxProperties
+                .getSecret() + "&js_code=" + code + "&grant_type=authorization_code");
+
+        WxOpenIdVO wxOpenIdVO = JSONUtil.toBean(jsonStr, WxOpenIdVO.class);
+
+        checkWxVO(wxOpenIdVO, "openId"); // 检查：微信回调 vo对象
+
+        return wxOpenIdVO;
+    }
+
+    /**
+     * code换取用户手机号信息，每个code只能使用一次，code的有效期为5min
+     */
+    @NotNull
+    public static WxPhoneByCodeVO.WxPhoneInfoVO getWxPhoneInfoVOByCode(String code) {
 
         String accessToken = getAccessToken();
 
@@ -42,28 +59,12 @@ public class WxUtil {
             .post("https://api.weixin.qq.com/wxa/business/getuserphonenumber?access_token=" + accessToken,
                 formJson.toString());
 
-        WxGetPhoneByCodeVO wxGetPhoneByCodeVO = JSONUtil.toBean(postStr, WxGetPhoneByCodeVO.class);
+        WxPhoneByCodeVO wxPhoneByCodeVO = JSONUtil.toBean(postStr, WxPhoneByCodeVO.class);
 
-        checkWxVO(wxGetPhoneByCodeVO, "用户手机号"); // 检查：微信回调 vo对象
+        checkWxVO(wxPhoneByCodeVO, "用户手机号"); // 检查：微信回调 vo对象
 
-        return wxGetPhoneByCodeVO.getPhone_info();
+        return wxPhoneByCodeVO.getPhone_info();
 
-    }
-
-    /**
-     * 通过微信的 code，获取微信的 openId
-     */
-    public static String getOpenId(String code) {
-
-        String jsonStr = HttpUtil.get(
-            "https://api.weixin.qq.com/sns/jscode2session?appid=" + wxProperties.getAppId() + "&secret=" + wxProperties
-                .getSecret() + "&js_code=" + code + "&grant_type=authorization_code");
-
-        WxGetOpenIdVO wxGetOpenIdVO = JSONUtil.toBean(jsonStr, WxGetOpenIdVO.class);
-
-        checkWxVO(wxGetOpenIdVO, "openId"); // 检查：微信回调 vo对象
-
-        return wxGetOpenIdVO.getOpenid();
     }
 
     /**

@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class WxGetPhoneByCodeVO extends WxBaseVO {
+public class WxPhoneByCodeVO extends WxBaseVO {
 
     @Schema(description = "用户手机号信息")
     private WxPhoneInfoVO phone_info;

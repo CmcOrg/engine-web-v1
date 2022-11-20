@@ -40,4 +40,7 @@ public class SysUserDO extends BaseEntity {
     @Schema(description = "租户主键 id")
     private Long tenantId;
 
+    @Schema(description = "微信 openId，可以为空")
+    private String wxOpenId;
+
 }

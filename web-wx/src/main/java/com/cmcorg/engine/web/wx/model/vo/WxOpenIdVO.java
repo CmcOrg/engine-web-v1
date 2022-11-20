@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class WxGetOpenIdVO extends WxBaseVO {
+public class WxOpenIdVO extends WxBaseVO {
 
     @Schema(description = "用户唯一标识")
     private String openid;
