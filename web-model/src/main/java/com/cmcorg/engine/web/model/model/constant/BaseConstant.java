@@ -25,6 +25,8 @@ public interface BaseConstant {
     int SECOND_30_EXPIRE_TIME = 30 * 1000; // 30秒钟过期
 
     long JWT_EXPIRE_TIME = DAY_1_EXPIRE_TIME; // jwt 过期时间
+    long LONG_CODE_EXPIRE_TIME = MINUTE_10_EXPIRE_TIME; // 长一点的验证码的过期时间
+    long SHORT_CODE_EXPIRE_TIME = SECOND_20_EXPIRE_TIME; // 短暂验证码的过期时间
     // 过期时间相关 ↑
 
     // id 相关 ↓

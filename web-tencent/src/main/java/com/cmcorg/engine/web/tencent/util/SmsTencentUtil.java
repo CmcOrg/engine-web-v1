@@ -1,6 +1,7 @@
 package com.cmcorg.engine.web.tencent.util;
 
 import com.cmcorg.engine.web.auth.model.vo.ApiResultVO;
+import com.cmcorg.engine.web.model.model.constant.BaseConstant;
 import com.cmcorg.engine.web.tencent.properties.TencentProperties;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.sms.v20210111.SmsClient;
@@ -27,8 +28,7 @@ public class SmsTencentUtil {
      */
     public static void sendDelete(String phoneNumber, String code) {
 
-        String[] templateParamSet = {code, "10"};
-        doSend("1391013", templateParamSet, phoneNumber);
+        sendForCode(phoneNumber, code, tencentProperties.getSendDelete());
 
     }
 
@@ -37,8 +37,7 @@ public class SmsTencentUtil {
      */
     public static void sendBind(String phoneNumber, String code) {
 
-        String[] templateParamSet = {code, "10"};
-        doSend("1389707", templateParamSet, phoneNumber);
+        sendForCode(phoneNumber, code, tencentProperties.getSendBind());
 
     }
 
@@ -47,18 +46,25 @@ public class SmsTencentUtil {
      */
     public static void sendUpdate(String phoneNumber, String code) {
 
-        String[] templateParamSet = {code, "10"};
-        doSend("1389628", templateParamSet, phoneNumber);
+        sendForCode(phoneNumber, code, tencentProperties.getSendUpdate());
 
     }
 
     /**
-     * 发送：密码重置
+     * 发送：修改密码
      */
-    public static void sendResetPassword(String phoneNumber, String code) {
+    public static void sendUpdatePassword(String phoneNumber, String code) {
 
-        String[] templateParamSet = {code};
-        doSend("1381647", templateParamSet, phoneNumber);
+        sendForCode(phoneNumber, code, tencentProperties.getSendUpdatePassword());
+
+    }
+
+    /**
+     * 发送：忘记密码
+     */
+    public static void sendForgotPassword(String phoneNumber, String code) {
+
+        sendForCode(phoneNumber, code, tencentProperties.getSendForgotPassword());
 
     }
 
@@ -67,8 +73,7 @@ public class SmsTencentUtil {
      */
     public static void sendSignIn(String phoneNumber, String code) {
 
-        String[] templateParamSet = {code, "10"};
-        doSend("1381644", templateParamSet, phoneNumber);
+        sendForCode(phoneNumber, code, tencentProperties.getSendSignIn());
 
     }
 
@@ -77,16 +82,29 @@ public class SmsTencentUtil {
      */
     public static void sendSignUp(String phoneNumber, String code) {
 
-        String[] templateParamSet = {code, "10"};
-        doSend("1380202", templateParamSet, phoneNumber);
+        sendForCode(phoneNumber, code, tencentProperties.getSendSignUp());
+
+    }
+
+    /**
+     * 发送：验证码相关
+     */
+    private static void sendForCode(String phoneNumber, String code, String templateId) {
+
+        String[] templateParamSet =
+            {code, String.valueOf(BaseConstant.LONG_CODE_EXPIRE_TIME)}; // 备注：第二个元素，表示是：验证码多久过期（分钟）
+
+        // 执行：发送短信
+        doSend(templateId, templateParamSet, phoneNumber);
 
     }
 
     /**
      * 执行：发送短信
+     * 注意：不建议直接调用本方法，而是把本方法，再封装一层再调用
      */
     @SneakyThrows
-    private static void doSend(String templateId, String[] templateParamSet, String phoneNumber) {
+    public static void doSend(String templateId, String[] templateParamSet, String phoneNumber) {
 
         /* 必要步骤：
          * 实例化一个认证对象，入参需要传入腾讯云账户密钥对secretId，secretKey。
