@@ -32,7 +32,7 @@ public class WxUtil {
      * 通过微信的 code，获取微信的 openId信息
      */
     @NotNull
-    public static WxOpenIdVO getOpenIdByCode(String code) {
+    public static WxOpenIdVO getWxOpenIdVOByCode(String code) {
 
         String jsonStr = HttpUtil.get(
             "https://api.weixin.qq.com/sns/jscode2session?appid=" + wxProperties.getAppId() + "&secret=" + wxProperties
