@@ -18,7 +18,7 @@ public class AuthProperties {
         "202e5c4e94c60b8e96cc6c8c2471309c11a39ef996dd5ab3b180ba9a0ddcefe99123edeff516e1d3d264f8dde85eaf6ace1ea236d826fda32080d00f64b47ad0111";
 
     @Schema(description = "是否允许：admin登录")
-    private Boolean adminEnable;
+    private Boolean adminEnable = true;
 
     @Schema(description = "admin 的昵称")
     private String adminNickname = "admin";
@@ -27,15 +27,15 @@ public class AuthProperties {
     private String adminPassword = "89750f4648ab240704529a1504ac8bbb4c85abd9b88522cef992eee8eb2304b2";
 
     @Schema(description = "是否启用：ipFilter，默认启用")
-    private Boolean ipFilterEnable;
+    private Boolean ipFilterEnable = true;
 
-    @Schema(description = "是否启用：用户名注册功能，默认启用")
-    private Boolean signInNameSignUpEnable;
+    @Schema(description = "是否启用：用户名注册功能，默认禁用")
+    private Boolean signInNameSignUpEnable = false;
 
     @Schema(description = "是否启用：邮箱注册功能，默认启用")
-    private Boolean emailSignUpEnable;
+    private Boolean emailSignUpEnable = true;
 
     @Schema(description = "是否启用：手机号码注册功能，默认启用")
-    private Boolean phoneSignUpEnable;
+    private Boolean phoneSignUpEnable = true;
 
 }

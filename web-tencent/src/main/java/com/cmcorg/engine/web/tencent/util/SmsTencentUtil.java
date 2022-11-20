@@ -1,6 +1,6 @@
 package com.cmcorg.engine.web.tencent.util;
 
-import com.cmcorg.engine.web.auth.model.vo.ApiResultVO;
+import cn.hutool.core.util.StrUtil;
 import com.cmcorg.engine.web.model.model.constant.BaseConstant;
 import com.cmcorg.engine.web.tencent.properties.TencentProperties;
 import com.tencentcloudapi.common.Credential;
@@ -158,7 +158,7 @@ public class SmsTencentUtil {
         SendSmsResponse sendSmsResponse = smsClient.SendSms(sendSmsRequest);
 
         if (sendSmsResponse.getSendStatusSet().length == 0) {
-            ApiResultVO.error("短信发送失败，请联系管理员");
+            throw new RuntimeException(StrUtil.format("短信发送失败，请联系管理员");
         }
 
         SendStatus sendStatus = sendSmsResponse.getSendStatusSet()[0];
@@ -166,7 +166,7 @@ public class SmsTencentUtil {
         String code = sendStatus.getCode();
 
         if (!"Ok".equals(code)) {
-            ApiResultVO.error("短信发送失败，code：【{}】，message：【{}】", code, sendStatus.getMessage());
+            throw new RuntimeException(StrUtil.format("短信发送失败，code：【{}】，message：【{}】", code, sendStatus.getMessage());
         }
 
     }

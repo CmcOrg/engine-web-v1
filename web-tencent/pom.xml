@@ -14,6 +14,12 @@
 
     <dependencies>
 
+        <!-- web-util -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>web-util</artifactId>
+        </dependency>
+
         <!-- 腾讯云，获取最新版本号：https://github.com/tencentcloud/tencentcloud-sdk-java -->
         <dependency>
             <groupId>com.tencentcloudapi</groupId>
@@ -23,7 +29,7 @@
         <!-- web-log -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>web-auth-nacos</artifactId>
+            <artifactId>web-log</artifactId>
         </dependency>
 
     </dependencies>
