@@ -9,7 +9,7 @@ package com.cmcorg.engine.web.redisson.enums;
 public enum RedisKeyEnum {
 
     // 【PRE_】开头 ↓
-    PRE_SOCKET_AUTH_USER_ID, // socket 认证时的 userId锁，锁【userId】
+    PRE_SOCKET_AUTH_GAME_USER_ID, // socket 认证时的 gameUserId锁，锁【gameUserId】
 
     PRE_ROOM_CONFIG_ID, // 房间配置主键 id锁，锁【主键 id】
 
