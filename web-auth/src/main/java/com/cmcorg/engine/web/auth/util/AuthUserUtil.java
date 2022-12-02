@@ -269,7 +269,7 @@ public class AuthUserUtil {
     @NotNull
     private static Set<Long> getRoleRefMenuIdSet(Set<Long> roleIdSet) {
         Map<Long, Set<Long>> roleRefMenuIdSetMap = MyCacheUtil
-            .getMapCache(RedisKeyEnum.ROLE_REF_MENU_ID_SET_CACHE, MyCacheUtil.getDefaultLongSetLongResultMap(), () -> {
+            .getMapCache(RedisKeyEnum.ROLE_REF_MENU_ID_SET_CACHE, MyCacheUtil.getDefaultLongSetMap(), () -> {
                 List<SysRoleRefMenuDO> sysRoleRefMenuDOList = ChainWrappers.lambdaQueryChain(sysRoleRefMenuMapper)
                     .select(SysRoleRefMenuDO::getRoleId, SysRoleRefMenuDO::getMenuId).list();
 
@@ -285,27 +285,29 @@ public class AuthUserUtil {
      * 获取用户关联的角色
      */
     private static void getUserRefRoleIdSet(Long userId, Set<Long> roleIdSet) {
-        Map<Long, Set<Long>> userRefRoleIdSetMap = MyCacheUtil
-            .getMapCache(RedisKeyEnum.USER_ID_REF_ROLE_ID_SET_CACHE, MyCacheUtil.getDefaultLongSetLongResultMap(),
-                () -> {
-                    List<SysRoleRefUserDO> sysRoleRefUserDOList = ChainWrappers.lambdaQueryChain(sysRoleRefUserMapper)
-                        .select(SysRoleRefUserDO::getRoleId, SysRoleRefUserDO::getUserId).list();
 
-                    return sysRoleRefUserDOList.stream().collect(Collectors.groupingBy(SysRoleRefUserDO::getUserId,
-                        Collectors.mapping(SysRoleRefUserDO::getRoleId, Collectors.toSet())));
-                });
+        Map<Long, Set<Long>> userRefRoleIdSetMap = MyCacheUtil
+            .getMapCache(RedisKeyEnum.USER_ID_REF_ROLE_ID_SET_CACHE, MyCacheUtil.getDefaultLongSetMap(), () -> {
+                List<SysRoleRefUserDO> sysRoleRefUserDOList = ChainWrappers.lambdaQueryChain(sysRoleRefUserMapper)
+                    .select(SysRoleRefUserDO::getRoleId, SysRoleRefUserDO::getUserId).list();
+
+                return sysRoleRefUserDOList.stream().collect(Collectors.groupingBy(SysRoleRefUserDO::getUserId,
+                    Collectors.mapping(SysRoleRefUserDO::getRoleId, Collectors.toSet())));
+            });
 
         Set<Long> userRefRoleIdSet = userRefRoleIdSetMap.get(userId);
 
         if (CollUtil.isNotEmpty(userRefRoleIdSet)) {
             roleIdSet.addAll(userRefRoleIdSet);
         }
+
     }
 
     /**
      * 获取默认角色 id
      */
     private static void getDefaultRoleId(Set<Long> roleIdSet) {
+
         Long defaultRoleId = MyCacheUtil.getCache(RedisKeyEnum.DEFAULT_ROLE_ID_CACHE, BaseConstant.SYS_ID, () -> {
             SysRoleDO sysRoleDO = ChainWrappers.lambdaQueryChain(sysRoleMapper).eq(SysRoleDO::getDefaultFlag, true)
                 .eq(BaseEntity::getEnableFlag, true).select(BaseEntity::getId).one();
@@ -319,6 +321,7 @@ public class AuthUserUtil {
         if (!BaseConstant.SYS_ID.equals(defaultRoleId)) {
             roleIdSet.add(defaultRoleId);
         }
+
     }
 
 }

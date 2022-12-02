@@ -142,8 +142,8 @@ public class MyJwtUtil {
             return null;
         }
 
-        Map<Long, String> map = MyCacheUtil
-            .getMapCache(RedisKeyEnum.USER_ID_JWT_SECRET_SUF_CACHE, MyCacheUtil.getDefaultLongStringResultMap(), () -> {
+        Map<Long, String> map =
+            MyCacheUtil.getMapCache(RedisKeyEnum.USER_ID_JWT_SECRET_SUF_CACHE, MyCacheUtil.getDefaultLongTMap(), () -> {
                 List<SysUserDO> sysUserDOList =
                     ChainWrappers.lambdaQueryChain(sysUserMapper).eq(SysUserDO::getEnableFlag, true)
                         .select(BaseEntity::getId, SysUserDO::getJwtSecretSuf).list();

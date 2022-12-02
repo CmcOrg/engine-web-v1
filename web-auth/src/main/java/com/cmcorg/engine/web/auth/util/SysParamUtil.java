@@ -32,7 +32,7 @@ public class SysParamUtil {
     public static String getValueById(Long id) {
 
         Map<Long, String> map =
-            MyCacheUtil.getMapCache(RedisKeyEnum.SYS_PARAM_CACHE, MyCacheUtil.getDefaultLongStringResultMap(), () -> {
+            MyCacheUtil.getMapCache(RedisKeyEnum.SYS_PARAM_CACHE, MyCacheUtil.getDefaultLongTMap(), () -> {
                 List<SysParamDO> sysParamDOList =
                     ChainWrappers.lambdaQueryChain(sysParamMapper).select(BaseEntity::getId, SysParamDO::getValue)
                         .eq(BaseEntity::getEnableFlag, true).list();

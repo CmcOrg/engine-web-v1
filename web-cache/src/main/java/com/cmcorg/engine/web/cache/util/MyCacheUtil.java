@@ -14,10 +14,7 @@ import org.redisson.api.RBatch;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 缓存工具类
@@ -35,22 +32,29 @@ public class MyCacheUtil {
     }
 
     @NotNull
-    public static Map<Long, Set<Long>> getDefaultLongSetLongResultMap() {
-        Map<Long, Set<Long>> defaultResultMap = MapUtil.newHashMap();
+    public static <T> Map<Long, T> getDefaultLongTMap() {
+        Map<Long, T> defaultResultMap = MapUtil.newHashMap();
+        defaultResultMap.put(BaseConstant.SYS_ID, null);
+        return defaultResultMap;
+    }
+
+    @NotNull
+    public static <T> Map<Long, Set<T>> getDefaultLongSetMap() {
+        Map<Long, Set<T>> defaultResultMap = MapUtil.newHashMap();
         defaultResultMap.put(BaseConstant.SYS_ID, new HashSet<>());
         return defaultResultMap;
     }
 
     @NotNull
-    public static Map<Long, String> getDefaultLongStringResultMap() {
-        Map<Long, String> defaultResultMap = MapUtil.newHashMap();
-        defaultResultMap.put(BaseConstant.SYS_ID, "");
+    public static <T> Map<Long, List<T>> getDefaultLongListMap() {
+        Map<Long, List<T>> defaultResultMap = MapUtil.newHashMap();
+        defaultResultMap.put(BaseConstant.SYS_ID, new ArrayList<>());
         return defaultResultMap;
     }
 
     @NotNull
     public static <T> List<T> getDefaultResultList() {
-        List<T> defaultResultList = CollUtil.newArrayList();
+        List<T> defaultResultList = new ArrayList<>();
         defaultResultList.add(null);
         return defaultResultList;
     }
