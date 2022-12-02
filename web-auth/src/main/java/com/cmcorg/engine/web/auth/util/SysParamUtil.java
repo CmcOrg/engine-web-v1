@@ -5,7 +5,7 @@ import com.cmcorg.engine.web.auth.mapper.SysParamMapper;
 import com.cmcorg.engine.web.auth.model.entity.BaseEntity;
 import com.cmcorg.engine.web.auth.model.entity.SysParamDO;
 import com.cmcorg.engine.web.cache.util.MyCacheUtil;
-import com.cmcorg.engine.web.redisson.enums.RedisKeyEnum;
+import com.cmcorg.engine.web.redisson.model.enums.RedisKeyEnum;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Component;
 

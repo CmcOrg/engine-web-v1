@@ -11,7 +11,7 @@ import com.cmcorg.engine.web.cache.properties.CacheProperties;
 import com.cmcorg.engine.web.kafka.enums.KafkaTopicEnum;
 import com.cmcorg.engine.web.kafka.util.KafkaUtil;
 import com.cmcorg.engine.web.model.model.constant.LogTopicConstant;
-import com.cmcorg.engine.web.redisson.enums.RedisKeyEnum;
+import com.cmcorg.engine.web.redisson.model.enums.RedisKeyEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBatch;
 import org.redisson.api.RedissonClient;

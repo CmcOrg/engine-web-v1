@@ -11,7 +11,7 @@ import com.cmcorg.engine.web.auth.util.ResponseUtil;
 import com.cmcorg.engine.web.auth.util.SysParamUtil;
 import com.cmcorg.engine.web.model.model.constant.BaseConstant;
 import com.cmcorg.engine.web.model.model.constant.ParamConstant;
-import com.cmcorg.engine.web.redisson.enums.RedisKeyEnum;
+import com.cmcorg.engine.web.redisson.model.enums.RedisKeyEnum;
 import lombok.SneakyThrows;
 import org.redisson.api.RAtomicLong;
 import org.redisson.api.RBucket;

@@ -4,7 +4,7 @@ import cn.hutool.cache.Cache;
 import cn.hutool.json.JSONUtil;
 import com.cmcorg.engine.web.cache.model.enums.CanalKafkaHandlerKeyEnum;
 import com.cmcorg.engine.web.model.model.constant.LogTopicConstant;
-import com.cmcorg.engine.web.redisson.enums.RedisKeyEnum;
+import com.cmcorg.engine.web.redisson.model.enums.RedisKeyEnum;
 import com.cmcorg.engine.web.util.util.TypeReferenceUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaHandler;

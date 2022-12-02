@@ -3,7 +3,7 @@ package com.cmcorg.engine.web.cache.model.enums;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.cmcorg.engine.web.cache.listener.CanalKafkaListener;
-import com.cmcorg.engine.web.redisson.enums.RedisKeyEnum;
+import com.cmcorg.engine.web.redisson.model.enums.RedisKeyEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

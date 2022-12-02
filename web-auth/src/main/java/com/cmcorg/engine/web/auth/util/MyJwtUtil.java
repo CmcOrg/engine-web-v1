@@ -19,7 +19,7 @@ import com.cmcorg.engine.web.auth.model.vo.ApiResultVO;
 import com.cmcorg.engine.web.auth.properties.AuthProperties;
 import com.cmcorg.engine.web.cache.util.MyCacheUtil;
 import com.cmcorg.engine.web.model.model.constant.BaseConstant;
-import com.cmcorg.engine.web.redisson.enums.RedisKeyEnum;
+import com.cmcorg.engine.web.redisson.model.enums.RedisKeyEnum;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

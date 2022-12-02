@@ -4,7 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.cmcorg.engine.web.redisson.enums.RedisKeyEnum;
+import com.cmcorg.engine.web.redisson.model.enums.RedisKeyEnum;
 import com.cmcorg.engine.web.wx.model.vo.WxAccessTokenVO;
 import com.cmcorg.engine.web.wx.model.vo.WxBaseVO;
 import com.cmcorg.engine.web.wx.model.vo.WxOpenIdVO;

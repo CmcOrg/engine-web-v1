@@ -38,8 +38,8 @@ public class BaseEntityNoId {
     @Schema(description = "是否启用")
     private Boolean enableFlag;
 
-    @RequestField(tableIgnoreFlag = true)
     // 如果要加 @TableLogic，建议继承本类，再给子类的字段上面加这个注解，因为不是每个业务都需要逻辑删除，不建议使用逻辑删除，而是采用直接删除，删除的数据，可以存到其他地方，不然数据量会越来越大
+    @RequestField(tableIgnoreFlag = true)
     @Schema(description = "是否逻辑删除")
     private Boolean delFlag;
 

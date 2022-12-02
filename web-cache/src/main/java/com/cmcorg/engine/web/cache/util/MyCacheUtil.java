@@ -6,7 +6,7 @@ import cn.hutool.core.lang.func.Func0;
 import cn.hutool.core.map.MapUtil;
 import com.cmcorg.engine.web.model.model.constant.BaseConstant;
 import com.cmcorg.engine.web.model.model.constant.LogTopicConstant;
-import com.cmcorg.engine.web.redisson.enums.RedisKeyEnum;
+import com.cmcorg.engine.web.redisson.model.interfaces.IRedisKey;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
@@ -26,10 +26,10 @@ import java.util.Set;
 @Slf4j(topic = LogTopicConstant.CACHE)
 public class MyCacheUtil {
 
-    private static Cache<RedisKeyEnum, Object> cache;
+    private static Cache<Enum<? extends IRedisKey>, Object> cache;
     private static RedissonClient redissonClient;
 
-    public MyCacheUtil(Cache<RedisKeyEnum, Object> cache, RedissonClient redissonClient) {
+    public MyCacheUtil(Cache<Enum<? extends IRedisKey>, Object> cache, RedissonClient redissonClient) {
         MyCacheUtil.cache = cache;
         MyCacheUtil.redissonClient = redissonClient;
     }
@@ -75,7 +75,7 @@ public class MyCacheUtil {
      */
     @SneakyThrows
     @NotNull
-    public static <T> T getCache(RedisKeyEnum redisKeyEnum, T defaultResult, @NotNull Func0<T> func0) {
+    public static <T> T getCache(Enum<? extends IRedisKey> redisKeyEnum, T defaultResult, @NotNull Func0<T> func0) {
 
         T result = (T)cache.get(redisKeyEnum);
 
@@ -111,7 +111,7 @@ public class MyCacheUtil {
      */
     @SneakyThrows
     @NotNull
-    public static <T extends Map<?, ?>> T getMapCache(RedisKeyEnum redisKeyEnum, T defaultResultMap,
+    public static <T extends Map<?, ?>> T getMapCache(Enum<? extends IRedisKey> redisKeyEnum, T defaultResultMap,
         @NotNull Func0<T> func0) {
 
         T resultMap = (T)cache.get(redisKeyEnum);
@@ -152,7 +152,7 @@ public class MyCacheUtil {
      */
     @SneakyThrows
     @NotNull
-    public static <T extends List<?>> T getListCache(RedisKeyEnum redisKeyEnum, T defaultResultList,
+    public static <T extends List<?>> T getListCache(Enum<? extends IRedisKey> redisKeyEnum, T defaultResultList,
         @NotNull Func0<T> func0) {
 
         T resultList = (T)cache.get(redisKeyEnum);
