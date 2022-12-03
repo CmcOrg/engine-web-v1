@@ -33,14 +33,10 @@ public class CanalKafkaListener {
 
     private static final Map<String, List<ICanalKafkaHandler>> CANAL_KAFKA_HANDLER_MAP = new HashMap<>();
 
-    public static CacheProperties cacheProperties; // 为了组装：完整的数据库 + 表名
-
     /**
      * 构造器：给 canalKafkaHandlerMap 添加元素
      */
     public CanalKafkaListener(List<ICanalKafkaHandler> iCanalKafkaHandlerList, CacheProperties cacheProperties) {
-
-        CanalKafkaListener.cacheProperties = cacheProperties;
 
         if (CollUtil.isEmpty(iCanalKafkaHandlerList)) {
             return;
@@ -51,7 +47,7 @@ public class CanalKafkaListener {
                 continue;
             }
             for (ICanalKafkaHandlerKey subItem : item.getKeySet()) {
-                putCanalKafkaHandlerMap(subItem, item);
+                putCanalKafkaHandlerMap(subItem, cacheProperties, item);
             }
         }
 
@@ -61,10 +57,10 @@ public class CanalKafkaListener {
      * 给 canalKafkaHandlerMap 添加元素
      */
     public static void putCanalKafkaHandlerMap(ICanalKafkaHandlerKey iCanalKafkaHandlerKey,
-        ICanalKafkaHandler canalKafkaHandler) {
+        CacheProperties cacheProperties, ICanalKafkaHandler canalKafkaHandler) {
 
-        List<ICanalKafkaHandler> handlerList =
-            CANAL_KAFKA_HANDLER_MAP.computeIfAbsent(iCanalKafkaHandlerKey.getKey(), k -> new ArrayList<>());
+        List<ICanalKafkaHandler> handlerList = CANAL_KAFKA_HANDLER_MAP
+            .computeIfAbsent(iCanalKafkaHandlerKey.getKey(cacheProperties), k -> new ArrayList<>());
 
         handlerList.add(canalKafkaHandler);
 

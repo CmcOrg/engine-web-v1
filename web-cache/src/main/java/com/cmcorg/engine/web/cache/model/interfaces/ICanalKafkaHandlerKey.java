@@ -1,7 +1,7 @@
 package com.cmcorg.engine.web.cache.model.interfaces;
 
 import cn.hutool.core.util.StrUtil;
-import com.cmcorg.engine.web.cache.listener.CanalKafkaListener;
+import com.cmcorg.engine.web.cache.properties.CacheProperties;
 import com.cmcorg.engine.web.redisson.model.interfaces.IRedisKey;
 import org.jetbrains.annotations.Nullable;
 
@@ -20,11 +20,11 @@ public interface ICanalKafkaHandlerKey {
     Set<Enum<? extends IRedisKey>> getDeleteRedisKeyEnumSet();
 
     @Nullable
-    default String getKey() {
+    default String getKey(CacheProperties cacheProperties) {
         if (StrUtil.isBlank(getName())) {
             return null;
         }
-        return CanalKafkaListener.cacheProperties.getDatabaseName() + "." + getName();
+        return cacheProperties.getDatabaseName() + "." + getName();
     }
 
 }

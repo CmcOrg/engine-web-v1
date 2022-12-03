@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class CanalKafkaRedisKeyConfiguration {
 
-    public CanalKafkaRedisKeyConfiguration() {
-        CanalKafkaHandlerUtil.putCanalKafkaHandlerMap(CanalKafkaHandlerKeyEnum.values());
+    public CanalKafkaRedisKeyConfiguration(CanalKafkaHandlerUtil canalKafkaHandlerUtil) {
+        canalKafkaHandlerUtil.putCanalKafkaHandlerMap(CanalKafkaHandlerKeyEnum.values());
     }
 
 }

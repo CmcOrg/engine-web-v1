@@ -28,14 +28,16 @@ public class LocalCacheKafkaListener {
 
     @Resource
     Cache<Enum<? extends IRedisKey>, Object> cache;
+    @Resource
+    CanalKafkaHandlerUtil canalKafkaHandlerUtil;
 
     @KafkaHandler
     public void receive(List<String> recordList, Acknowledgment acknowledgment) {
 
         Set<Enum<? extends IRedisKey>> redisKeyEnumSet =
             recordList.stream().map(it -> JSONUtil.toBean(it, TypeReferenceUtil.STRING_SET, false))
-                .flatMap(Collection::stream).distinct().map(CanalKafkaHandlerUtil::getByKey).filter(Objects::nonNull)
-                .map(ICanalKafkaHandlerKey::getDeleteRedisKeyEnumSet).filter(Objects::nonNull)
+                .flatMap(Collection::stream).distinct().map(it -> canalKafkaHandlerUtil.getByKey(it))
+                .filter(Objects::nonNull).map(ICanalKafkaHandlerKey::getDeleteRedisKeyEnumSet).filter(Objects::nonNull)
                 .flatMap(Collection::stream).collect(Collectors.toSet());
 
         if (redisKeyEnumSet.size() != 0) {
