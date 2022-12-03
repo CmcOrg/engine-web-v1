@@ -2,9 +2,10 @@ package com.cmcorg.engine.web.cache.listener;
 
 import cn.hutool.cache.Cache;
 import cn.hutool.json.JSONUtil;
-import com.cmcorg.engine.web.cache.model.enums.CanalKafkaHandlerKeyEnum;
+import com.cmcorg.engine.web.cache.model.interfaces.ICanalKafkaHandlerKey;
+import com.cmcorg.engine.web.cache.util.CanalKafkaHandlerUtil;
 import com.cmcorg.engine.web.model.model.constant.LogTopicConstant;
-import com.cmcorg.engine.web.redisson.model.enums.RedisKeyEnum;
+import com.cmcorg.engine.web.redisson.model.interfaces.IRedisKey;
 import com.cmcorg.engine.web.util.util.TypeReferenceUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaHandler;
@@ -26,20 +27,20 @@ import java.util.stream.Collectors;
 public class LocalCacheKafkaListener {
 
     @Resource
-    Cache<RedisKeyEnum, Object> cache;
+    Cache<Enum<? extends IRedisKey>, Object> cache;
 
     @KafkaHandler
     public void receive(List<String> recordList, Acknowledgment acknowledgment) {
 
-        Set<RedisKeyEnum> redisKeyEnumSet =
+        Set<Enum<? extends IRedisKey>> redisKeyEnumSet =
             recordList.stream().map(it -> JSONUtil.toBean(it, TypeReferenceUtil.STRING_SET, false))
-                .flatMap(Collection::stream).distinct().map(CanalKafkaHandlerKeyEnum::getByKey).filter(Objects::nonNull)
-                .map(CanalKafkaHandlerKeyEnum::getDeleteRedisKeyEnumSet).filter(Objects::nonNull)
+                .flatMap(Collection::stream).distinct().map(CanalKafkaHandlerUtil::getByKey).filter(Objects::nonNull)
+                .map(ICanalKafkaHandlerKey::getDeleteRedisKeyEnumSet).filter(Objects::nonNull)
                 .flatMap(Collection::stream).collect(Collectors.toSet());
 
         if (redisKeyEnumSet.size() != 0) {
             log.info("canal：清除 本地缓存：{}", redisKeyEnumSet);
-            for (RedisKeyEnum item : redisKeyEnumSet) {
+            for (Enum<? extends IRedisKey> item : redisKeyEnumSet) {
                 cache.remove(item); // 清除本地缓存
             }
         }
