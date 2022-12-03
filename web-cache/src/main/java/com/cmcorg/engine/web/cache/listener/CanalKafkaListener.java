@@ -11,7 +11,6 @@ import com.cmcorg.engine.web.cache.properties.CacheProperties;
 import com.cmcorg.engine.web.kafka.enums.KafkaTopicEnum;
 import com.cmcorg.engine.web.kafka.util.KafkaUtil;
 import com.cmcorg.engine.web.model.model.constant.LogTopicConstant;
-import com.cmcorg.engine.web.redisson.model.interfaces.IRedisKey;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBatch;
 import org.redisson.api.RedissonClient;
@@ -32,39 +31,16 @@ public class CanalKafkaListener {
     @Resource
     RedissonClient redissonClient;
 
-    private final Map<String, List<ICanalKafkaHandler>> canalKafkaHandlerMap = new HashMap<>();
+    private static final Map<String, List<ICanalKafkaHandler>> CANAL_KAFKA_HANDLER_MAP = new HashMap<>();
 
     public static CacheProperties cacheProperties; // 为了组装：完整的数据库 + 表名
 
     /**
      * 构造器：给 canalKafkaHandlerMap 添加元素
      */
-    public CanalKafkaListener(List<ICanalKafkaHandler> iCanalKafkaHandlerList, CacheProperties cacheProperties,
-        List<ICanalKafkaHandlerKey> iCanalKafkaHandlerKeyList) {
+    public CanalKafkaListener(List<ICanalKafkaHandler> iCanalKafkaHandlerList, CacheProperties cacheProperties) {
 
         CanalKafkaListener.cacheProperties = cacheProperties;
-
-        for (ICanalKafkaHandlerKey item : iCanalKafkaHandlerKeyList) {
-            if (CollUtil.isEmpty(item.getDeleteRedisKeyEnumSet())) {
-                continue;
-            }
-            // 添加一个 ICanalKafkaHandler，进行删除操作
-            for (Enum<? extends IRedisKey> subItem : item.getDeleteRedisKeyEnumSet()) {
-                putCanalKafkaHandlerMap(item, new ICanalKafkaHandler() {
-                    @Override
-                    public Set<ICanalKafkaHandlerKey> getKeySet() {
-                        return null;
-                    }
-
-                    @Override
-                    public void handler(CanalKafkaDTO dto, RBatch batch) {
-                        if (dto.getType().dateUpdateFlag()) {
-                            batch.getBucket(subItem.name()).deleteAsync();
-                        }
-                    }
-                });
-            }
-        }
 
         if (CollUtil.isEmpty(iCanalKafkaHandlerList)) {
             return;
@@ -84,21 +60,20 @@ public class CanalKafkaListener {
     /**
      * 给 canalKafkaHandlerMap 添加元素
      */
-    private void putCanalKafkaHandlerMap(ICanalKafkaHandlerKey iCanalKafkaHandlerKey,
+    public static void putCanalKafkaHandlerMap(ICanalKafkaHandlerKey iCanalKafkaHandlerKey,
         ICanalKafkaHandler canalKafkaHandler) {
 
         List<ICanalKafkaHandler> handlerList =
-            canalKafkaHandlerMap.computeIfAbsent(iCanalKafkaHandlerKey.getKey(), k -> new ArrayList<>());
+            CANAL_KAFKA_HANDLER_MAP.computeIfAbsent(iCanalKafkaHandlerKey.getKey(), k -> new ArrayList<>());
 
         handlerList.add(canalKafkaHandler);
 
-        canalKafkaHandlerMap.put(iCanalKafkaHandlerKey.getKey(), handlerList);
     }
 
     @KafkaHandler
     public void receive(List<String> recordList, Acknowledgment acknowledgment) {
 
-        if (canalKafkaHandlerMap.size() == 0) {
+        if (CANAL_KAFKA_HANDLER_MAP.size() == 0) {
             acknowledgment.acknowledge();
             return;
         }
@@ -116,7 +91,7 @@ public class CanalKafkaListener {
             // 处理 key
             key = handlerKey(key);
 
-            List<ICanalKafkaHandler> handlerList = canalKafkaHandlerMap.get(key);
+            List<ICanalKafkaHandler> handlerList = CANAL_KAFKA_HANDLER_MAP.get(key);
 
             if (CollUtil.isNotEmpty(handlerList)) {
                 keySet.add(key);
