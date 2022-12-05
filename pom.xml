@@ -205,7 +205,7 @@
             <dependency>
                 <groupId>com.google.protobuf</groupId>
                 <artifactId>protobuf-java</artifactId>
-                <version>3.21.9</version>
+                <version>3.21.10</version>
             </dependency>
 
             <!-- ssh，sftp -->
@@ -240,14 +240,14 @@
             <dependency>
                 <groupId>com.tencentcloudapi</groupId>
                 <artifactId>tencentcloud-sdk-java</artifactId>
-                <version>3.1.638</version>
+                <version>3.1.644</version>
             </dependency>
 
             <!-- 支付宝，获取最新版本号：https://github.com/alipay/alipay-sdk-java-all -->
             <dependency>
                 <groupId>com.alipay.sdk</groupId>
                 <artifactId>alipay-sdk-java</artifactId>
-                <version>4.34.71.ALL</version>
+                <version>4.34.86.ALL</version>
             </dependency>
 
             <!-- 邮件 -->
@@ -261,7 +261,7 @@
             <dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson-spring-boot-starter</artifactId>
-                <version>3.18.0</version>
+                <version>3.18.1</version>
             </dependency>
 
             <!-- 离线IP地址定位库 -->
