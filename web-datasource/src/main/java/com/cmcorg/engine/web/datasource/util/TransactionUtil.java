@@ -1,4 +1,4 @@
-package com.cmcorg.engine.web.auth.util;
+package com.cmcorg.engine.web.datasource.util;
 
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
