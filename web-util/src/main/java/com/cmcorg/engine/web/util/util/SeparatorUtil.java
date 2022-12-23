@@ -13,8 +13,8 @@ public class SeparatorUtil {
     /**
      * 返回：被【竖线分隔符】，包裹的字符串
      */
-    public static String verticalLine(String str) {
-        return VERTICAL_LINE_SEPARATOR + str + VERTICAL_LINE_SEPARATOR;
+    public static String verticalLine(Object object) {
+        return VERTICAL_LINE_SEPARATOR + object + VERTICAL_LINE_SEPARATOR;
     }
 
     /**
