@@ -16,4 +16,6 @@ public interface PropertiesPrefixConstant {
 
     String TENCENT = PRE_SYS + "tencent"; // 腾讯相关
 
+    String SOCKET = PRE_SYS + "socket"; // socket相关
+
 }
