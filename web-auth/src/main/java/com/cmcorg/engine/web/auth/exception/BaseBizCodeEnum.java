@@ -40,5 +40,6 @@ public enum BaseBizCodeEnum implements IBizCode {
 
     public static final String OK = "操作成功";
     public static final String SEND_OK = "发送成功";
+    public static final String OK_ENGLISH = "ok";
 
 }
