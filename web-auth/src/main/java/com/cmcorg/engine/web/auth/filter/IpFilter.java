@@ -12,6 +12,7 @@ import com.cmcorg.engine.web.auth.util.SysParamUtil;
 import com.cmcorg.engine.web.model.model.constant.BaseConstant;
 import com.cmcorg.engine.web.model.model.constant.ParamConstant;
 import com.cmcorg.engine.web.redisson.model.enums.RedisKeyEnum;
+import com.cmcorg.engine.web.util.util.SeparatorUtil;
 import lombok.SneakyThrows;
 import org.redisson.api.RAtomicLong;
 import org.redisson.api.RBucket;
@@ -97,7 +98,7 @@ public class IpFilter implements Filter {
             return null;
         }
 
-        List<String> splitTrimList = StrUtil.splitTrim(ipTotalCheckValue, ":");
+        List<String> splitTrimList = StrUtil.splitTrim(ipTotalCheckValue, SeparatorUtil.COLON_SEPARATOR);
         if (splitTrimList.size() != 2) {
             return null;
         }
