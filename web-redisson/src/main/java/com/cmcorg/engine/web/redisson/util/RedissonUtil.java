@@ -24,12 +24,19 @@ public class RedissonUtil {
     public static <T> T doLock(String str, Supplier<T> supplier) {
 
         RLock lock = redissonClient.getLock(PRE_REDISSON + str);
+
         lock.lock();
+
         try {
+
             return supplier.get();
+
         } finally {
+
             lock.unlock();
+
         }
+
     }
 
     /**
@@ -38,12 +45,19 @@ public class RedissonUtil {
     public static <T> T doMultiLock(String preName, Set<?> nameSet, Supplier<T> supplier, RLock... lockArr) {
 
         RLock lock = getMultiLock(preName, nameSet, lockArr);
+
         lock.lock();
+
         try {
+
             return supplier.get();
+
         } finally {
+
             lock.unlock();
+
         }
+
     }
 
     /**
@@ -76,6 +90,7 @@ public class RedissonUtil {
         }
 
         return redissonClient.getMultiLock(lockArr);
+
     }
 
 }
