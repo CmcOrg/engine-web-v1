@@ -11,7 +11,7 @@ public class LocalCacheConfiguration {
 
     @Bean
     public Cache<Enum<? extends IRedisKey>, Object> cache() {
-        return CacheUtil.newLRUCache(5120);
+        return CacheUtil.newLRUCache(0);
     }
 
 }
