@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.8</version>
+        <version>2.7.7</version>
         <relativePath/>
     </parent>
 
@@ -219,7 +219,7 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>easyexcel</artifactId>
-                <version>3.2.0</version>
+                <version>3.1.5</version>
             </dependency>
 
             <!-- 基于JNA的操作系统和硬件信息库 -->
@@ -246,8 +246,8 @@
             <!-- 支付宝，获取最新版本号：https://github.com/alipay/alipay-sdk-java-all -->
             <dependency>
                 <groupId>com.alipay.sdk</groupId>
-                <artifactId>alipay-sdk-java</artifactId>
-                <version>4.35.37.ALL</version>
+                <artifactId>alipay-sdk-java-v3</artifactId>
+                <version>1.0.2.ALL</version>
             </dependency>
 
             <!-- 邮件 -->
@@ -303,7 +303,7 @@
             <dependency>
                 <groupId>org.jetbrains</groupId>
                 <artifactId>annotations</artifactId>
-                <version>24.0.0</version>
+                <version>23.0.0</version>
             </dependency>
 
         </dependencies>

@@ -55,6 +55,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
+
     }
 
     @SneakyThrows
@@ -130,6 +131,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         // 通过 userId 获取用户具有的权限
         return new UsernamePasswordAuthenticationToken(jwt.getPayload().getClaimsJson(), null,
             MyJwtUtil.getSimpleGrantedAuthorityListByUserId(userId));
+
     }
 
     /**
@@ -137,8 +139,11 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
      */
     @Nullable
     public static UsernamePasswordAuthenticationToken loginExpired(HttpServletResponse response) {
+
         ResponseUtil.out(response, BaseBizCodeEnum.LOGIN_EXPIRED);
+
         return null;
+
     }
 
 }
