@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.7</version>
+        <version>2.7.8</version>
         <relativePath/>
     </parent>
 
@@ -219,7 +219,7 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>easyexcel</artifactId>
-                <version>3.1.5</version>
+                <version>3.2.0</version>
             </dependency>
 
             <!-- 基于JNA的操作系统和硬件信息库 -->
@@ -303,7 +303,7 @@
             <dependency>
                 <groupId>org.jetbrains</groupId>
                 <artifactId>annotations</artifactId>
-                <version>23.0.0</version>
+                <version>24.0.0</version>
             </dependency>
 
         </dependencies>
