@@ -187,7 +187,7 @@
                 <version>2021.0.4.0</version>
             </dependency>
 
-            <!-- 解决：shardin1g-jdbc 启动报错，备注：这个只指定版本号即可，不用引入 -->
+            <!-- 解决：sharding-jdbc 启动报错，备注：这个只指定版本号即可，不用引入 -->
             <dependency>
                 <groupId>org.yaml</groupId>
                 <artifactId>snakeyaml</artifactId>
