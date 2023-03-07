@@ -357,10 +357,10 @@
                                 <groupId>org.springframework.boot</groupId>
                                 <artifactId>spring-boot-configuration-processor</artifactId>
                             </exclude>
-                            <dependency>
+                            <exclude>
                                 <groupId>org.springframework.boot</groupId>
                                 <artifactId>spring-boot-starter-actuator</artifactId>
-                            </dependency>
+                            </exclude>
                             <exclude>
                                 <groupId>org.jetbrains</groupId>
                                 <artifactId>annotations</artifactId>
